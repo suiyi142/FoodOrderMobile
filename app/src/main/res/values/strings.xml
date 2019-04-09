@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FoodOrderMobile</string>
+    <string name="login">登录</string>
+    <string name="rememberPassword">记住密码</string>
+
+    <string name="pleaseLogin">请登录</string>
+    <string name="welcome">欢迎 !</string>
+    <string name="first_String">我们需要您给您的账号设置一个名字和密码</string>
+    <string name="re_password_hint">确认密码</string>
+    <string name="to_setup">去注册</string>
+    <string name="to_login">去登录</string>
+    <string name="account_hint">请输入账号</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="auto_login">自动登录</string>
+    <string name="to_business_register">我要开店</string>
+    <string name="business_null">莫得商家</string>
+    <string name="register">注册</string>
+    <string name="et_register_business_other">写一些备注吧</string>
+    <string name="max_seats">店铺有多少座位</string>
+    <string name="re_password">再输入一次密码</string>
+    <string name="address_hint">请输入店铺地址</string>
 </resources>

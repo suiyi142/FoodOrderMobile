@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#999"
+    tools:context=".view.activity.BusinessLoginActivity">
+
+    <Button
+        android:id="@+id/bt_to_business_register"
+        style="@style/Font_family_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dip"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/text_bg"
+        android:text="@string/to_business_register"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/lv_login_business"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bt_to_business_register"
+        android:layout_margin="20dp"
+        android:textColor="#fff"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_business_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bt_to_business_register"
+        android:gravity="center"
+        android:text="@string/business_null"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

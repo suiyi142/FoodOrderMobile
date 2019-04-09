@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_choice"
+    tools:context=".view.activity.ChoiceActivity">
+
+    <mobile.fom.com.foodordermobile.myview.CircleButton
+        android:id="@+id/bt_to_business"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="toBusiness"
+        app:color="#00f"
+        app:mTextColor="#fff"
+        app:myText="我是商家" />
+
+    <mobile.fom.com.foodordermobile.myview.CircleButton
+        android:id="@+id/bt_to_user"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/bt_to_business"
+        android:layout_centerHorizontal="true"
+        android:onClick="toUser"
+        android:text="我是"
+        app:color="#f00"
+        app:mTextColor="#fff"
+        app:myText="我是用户" />
+</RelativeLayout>
