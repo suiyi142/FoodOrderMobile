@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import mobile.fom.com.foodordermobile.bean.Business;
 
-public interface IBusinessView {
+public interface IBusinessLoginView {
 
     /**
      * 显示列表,异步

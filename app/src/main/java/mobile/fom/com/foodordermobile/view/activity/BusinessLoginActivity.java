@@ -20,9 +20,9 @@ import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
-import mobile.fom.com.foodordermobile.view.IBusinessView;
+import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 
-public class BusinessLoginActivity extends AppCompatActivity implements IBusinessView, View.OnClickListener {
+public class BusinessLoginActivity extends AppCompatActivity implements IBusinessLoginView, View.OnClickListener {
 
     private BusinessPresenter presenter;
 

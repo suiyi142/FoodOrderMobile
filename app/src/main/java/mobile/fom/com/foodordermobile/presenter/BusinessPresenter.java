@@ -8,19 +8,26 @@ import java.util.ArrayList;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
-import mobile.fom.com.foodordermobile.view.IBusinessView;
+import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
+import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
 
 public class BusinessPresenter {
     private IBusinessModel mBusinessModel;
-    private IBusinessView mBusinessView;
+    private IBusinessLoginView mBusinessView;
+    private IBusinessRegisterView mBusinessRegisterView;
 
-    public BusinessPresenter(IBusinessView mBusinessView) {
+    public BusinessPresenter(IBusinessLoginView mBusinessView) {
         this.mBusinessView = mBusinessView;
-        mBusinessModel = new BusinessModel();
+        getBusinessModel();
     }
 
-    public void findBusiness(){
-        mBusinessModel.findBusiness(new IBusinessModel.ICallBack(){
+    public BusinessPresenter(IBusinessRegisterView mBusinessRegisterView) {
+        this.mBusinessRegisterView = mBusinessRegisterView;
+        getBusinessModel();
+    }
+
+    public void findBusiness() {
+        mBusinessModel.findBusiness(new IBusinessModel.ICallBack() {
             @Override
             public void onSuccess(String msg) {
                 Gson gson = new Gson();
@@ -37,5 +44,29 @@ public class BusinessPresenter {
                 mBusinessView.setFailedMsg(msg);
             }
         });
+    }
+
+    public void businessRegister(Business business){
+        mBusinessModel.register(business, new IBusinessModel.ICallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1"))
+                    mBusinessRegisterView.registerSuccess();
+                else mBusinessRegisterView.registerFailed(msg);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessRegisterView.registerFailed(msg);
+            }
+        });
+    }
+
+    /*
+    懒汉式创建model
+     */
+    private void getBusinessModel() {
+        if (mBusinessModel == null)
+            mBusinessModel = new BusinessModel();
     }
 }

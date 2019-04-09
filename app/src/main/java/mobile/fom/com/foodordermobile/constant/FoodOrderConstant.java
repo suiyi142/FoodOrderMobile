@@ -12,4 +12,6 @@ public class FoodOrderConstant {
     public static final String SERVER_ADDRESS = "http://10.0.2.2:8080/foodOrderServer/";
     //获取商家列表
     public static final String B_FIND_BUSINESS = "BusinessServlet?method=findBusiness";
+    //商家注册
+    public static final String B_BUSINESS_REGISTER = "BusinessServlet?method=register";
 }
