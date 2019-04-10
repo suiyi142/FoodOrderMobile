@@ -62,6 +62,26 @@ public class BusinessPresenter {
         });
     }
 
+    public void businessLogin(String b_id, String password){
+        mBusinessModel.login(b_id, password, new IBusinessModel.ICallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("0"))
+                    mBusinessView.showLoginErrorMsg("登录失败");
+                else {
+                    Gson gson = new Gson();
+                    Business business = gson.fromJson(msg,Business.class);
+                    mBusinessView.toBusiness(business);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessView.showLoginErrorMsg(msg);
+            }
+        });
+    }
+
     /*
     懒汉式创建model
      */

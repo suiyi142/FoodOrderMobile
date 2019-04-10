@@ -1,5 +1,6 @@
 package mobile.fom.com.foodordermobile.view.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +8,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +28,9 @@ import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 
-public class BusinessLoginActivity extends AppCompatActivity implements IBusinessLoginView, View.OnClickListener {
+public class BusinessLoginActivity extends AppCompatActivity implements IBusinessLoginView, View.OnClickListener, AdapterView.OnItemClickListener {
 
+    private static final String TAG = "BusinessLogin";
     private BusinessPresenter presenter;
 
     private ProgressDialog progressDialog;
@@ -32,6 +39,11 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
     private TextView tv_business_null;
     private ArrayList<Business> list;
     private ArrayList<String> businessNamesList;
+    private AlertDialog passwordDialog;
+    private EditText et_login_business_password;
+    private Button bt_login_business;
+
+    private int selectBusiness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +52,20 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
         presenter = new BusinessPresenter(this);
         initView();
         initProgressDialog();
+        initPasswordDialog();
         presenter.findBusiness();
 
+    }
+
+    /*
+    初始化输入密码对话框
+     */
+    private void initPasswordDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_password, null);
+        et_login_business_password = view.findViewById(R.id.et_login_business_password);
+        bt_login_business = view.findViewById(R.id.bt_login_business);
+        passwordDialog = new AlertDialog.Builder(this).setView(view).create();
+        bt_login_business.setOnClickListener(this);
     }
 
     /*
@@ -86,6 +110,7 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
                 progressDialog.dismiss();
                 lv_login_business.setVisibility(View.VISIBLE);
                 lv_login_business.setAdapter(adapter);
+                lv_login_business.setOnItemClickListener(BusinessLoginActivity.this);
 
             }
         });
@@ -122,6 +147,30 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
     }
 
     @Override
+    public void toBusiness(final Business business) {
+        progressDialog.dismiss();
+        runOnUiThread(new Thread(){
+            @Override
+            public void run() {
+                ToastUtil.showToast(BusinessLoginActivity.this,"登陆成功");
+                Log.i(TAG,business.toString());
+            }
+        });
+
+    }
+
+    @Override
+    public void showLoginErrorMsg(final String msg) {
+        progressDialog.dismiss();
+        runOnUiThread(new Thread(){
+            @Override
+            public void run() {
+                ToastUtil.showToast(BusinessLoginActivity.this,msg);
+            }
+        });
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_business_null:
@@ -132,6 +181,15 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
             case R.id.bt_to_business_register:
                 BusinessRegisterActivity.startActivity(this);
                 break;
+            case R.id.bt_login_business:
+                progressDialog.show();
+                String b_id = list.get(selectBusiness).getB_id();
+                String password = et_login_business_password.getText().toString().trim();
+                if (TextUtils.isEmpty(b_id)||TextUtils.isEmpty(password)){
+                    ToastUtil.showToast(this,"密码或账号为空");
+                    break;
+                }
+                presenter.businessLogin(b_id,password);
         }
     }
 
@@ -141,5 +199,12 @@ public class BusinessLoginActivity extends AppCompatActivity implements IBusines
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        selectBusiness = i;
+        passwordDialog.show();
     }
 }

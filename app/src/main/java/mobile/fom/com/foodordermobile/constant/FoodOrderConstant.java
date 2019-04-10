@@ -14,4 +14,6 @@ public class FoodOrderConstant {
     public static final String B_FIND_BUSINESS = "BusinessServlet?method=findBusiness";
     //商家注册
     public static final String B_BUSINESS_REGISTER = "BusinessServlet?method=register";
+    //商家注册
+    public static final String B_BUSINESS_LOGIN = "BusinessServlet?method=login";
 }

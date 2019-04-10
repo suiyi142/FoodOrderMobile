@@ -24,4 +24,12 @@ public interface IBusinessLoginView {
      * 没有商家的情况
      */
     void BusinessZero();
+
+    /**
+     * 登录成功，去Business界面
+     */
+    void toBusiness(Business business);
+
+    void showLoginErrorMsg(String msg);
+
 }

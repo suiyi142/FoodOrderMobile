@@ -63,4 +63,23 @@ public class BusinessModel implements IBusinessModel {
 
     }
 
+    @Override
+    public void login(String b_id, String password, final ICallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_LOGIN;
+        HashMap<String,String> map = new HashMap<>();
+        map.put("b_id",b_id);
+        map.put("password",password);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
 }
