@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
+import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
 
 public class BusinessPresenter {
     private IBusinessModel mBusinessModel;
-    private IBusinessLoginView mBusinessView;
+    private IBusinessLoginView mBusinessLoginView;
     private IBusinessRegisterView mBusinessRegisterView;
 
     public BusinessPresenter(IBusinessLoginView mBusinessView) {
-        this.mBusinessView = mBusinessView;
+        this.mBusinessLoginView = mBusinessView;
         getBusinessModel();
     }
 
@@ -26,28 +27,36 @@ public class BusinessPresenter {
         getBusinessModel();
     }
 
+    /**
+     * 查询商家
+     */
     public void findBusiness() {
-        mBusinessModel.findBusiness(new IBusinessModel.ICallBack() {
+        mBusinessModel.findBusiness(new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 Gson gson = new Gson();
                 ArrayList<Business> list = gson.fromJson(msg, new TypeToken<ArrayList<Business>>() {
                 }.getType());
                 if (list.size() == 0)
-                    mBusinessView.BusinessZero();
+                    mBusinessLoginView.BusinessZero();
                 else
-                    mBusinessView.setBusinessList(list);
+                    mBusinessLoginView.setBusinessList(list);
             }
 
             @Override
             public void onFailure(String msg) {
-                mBusinessView.setFailedMsg(msg);
+                mBusinessLoginView.setFailedMsg(msg);
             }
         });
     }
 
-    public void businessRegister(Business business){
-        mBusinessModel.register(business, new IBusinessModel.ICallBack() {
+    /**
+     * 商家注册
+     *
+     * @param business 商家bean
+     */
+    public void businessRegister(Business business) {
+        mBusinessModel.register(business, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1"))
@@ -62,22 +71,28 @@ public class BusinessPresenter {
         });
     }
 
-    public void businessLogin(String b_id, String password){
-        mBusinessModel.login(b_id, password, new IBusinessModel.ICallBack() {
+    /**
+     * 商家登录
+     *
+     * @param b_id     商家id
+     * @param password 商家密码
+     */
+    public void businessLogin(String b_id, String password) {
+        mBusinessModel.login(b_id, password, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("0"))
-                    mBusinessView.showLoginErrorMsg("登录失败");
+                    mBusinessLoginView.showLoginErrorMsg("登录失败");
                 else {
                     Gson gson = new Gson();
-                    Business business = gson.fromJson(msg,Business.class);
-                    mBusinessView.toBusiness(business);
+                    Business business = gson.fromJson(msg, Business.class);
+                    mBusinessLoginView.toBusiness(business);
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                mBusinessView.showLoginErrorMsg(msg);
+                mBusinessLoginView.showLoginErrorMsg(msg);
             }
         });
     }

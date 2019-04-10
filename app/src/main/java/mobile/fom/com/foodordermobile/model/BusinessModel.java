@@ -20,7 +20,7 @@ public class BusinessModel implements IBusinessModel {
      * 获取商家列表
      */
     @Override
-    public void findBusiness(final ICallBack callBack) {
+    public void findBusiness(final IModelCallBack callBack) {
         Log.i(TAG, FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_FIND_BUSINESS);
         HttpUtil.sendHttpRequest(FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_FIND_BUSINESS, new Callback() {
             @Override
@@ -42,13 +42,13 @@ public class BusinessModel implements IBusinessModel {
     }
 
     @Override
-    public void register(Business business, final ICallBack callBack) {
+    public void register(Business business, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_REGISTER;
-        HashMap<String,String> map = new HashMap<>();
-        map.put("address",business.getAddress());
-        map.put("password",business.getPassword());
-        map.put("max_seats",business.getMax_seats()+"");
-        map.put("other",business.getOther());
+        HashMap<String, String> map = new HashMap<>();
+        map.put("address", business.getAddress());
+        map.put("password", business.getPassword());
+        map.put("max_seats", business.getMax_seats() + "");
+        map.put("other", business.getOther());
         HttpUtil.sendHttpRequest(url, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -64,11 +64,11 @@ public class BusinessModel implements IBusinessModel {
     }
 
     @Override
-    public void login(String b_id, String password, final ICallBack callBack) {
+    public void login(String b_id, String password, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_LOGIN;
-        HashMap<String,String> map = new HashMap<>();
-        map.put("b_id",b_id);
-        map.put("password",password);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        map.put("password", password);
         HttpUtil.sendHttpRequest(url, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

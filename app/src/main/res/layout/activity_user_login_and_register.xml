@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    tools:context=".view.activity.UserLoginActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/ll_title"
+                layout="@layout/layout_tittle" />
+
+            <include
+                android:id="@+id/fragment_user_login"
+                layout="@layout/layout_user_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_title" />
+
+            <include
+                android:id="@+id/fragment_user_register"
+                layout="@layout/layout_user_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_title"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -19,4 +19,6 @@
     <string name="max_seats">店铺有多少座位</string>
     <string name="re_password">再输入一次密码</string>
     <string name="address_hint">请输入店铺地址</string>
+    <string name="JoinUs">加入我们</string>
+    <string name="name_hint">请输入姓名</string>
 </resources>
