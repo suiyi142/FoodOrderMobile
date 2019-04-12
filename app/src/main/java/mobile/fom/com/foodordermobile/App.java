@@ -1,19 +1,21 @@
 package mobile.fom.com.foodordermobile;
 
-import android.app.Application;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class App extends Application {
+public class App extends AppCompatActivity {
 
-    public static App app;
+    public static Context context;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        app = this;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getApplicationContext();
     }
 
-    public static App getInstance(){
-        return app;
+    public static Context getInstance() {
+        return context;
     }
 }
 

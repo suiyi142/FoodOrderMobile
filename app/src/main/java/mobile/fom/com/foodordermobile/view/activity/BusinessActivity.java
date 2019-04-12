@@ -1,11 +1,11 @@
 package mobile.fom.com.foodordermobile.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
 
-public class BusinessActivity extends AppCompatActivity {
+public class BusinessActivity extends App {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

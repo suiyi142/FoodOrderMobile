@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".view.activity.UserLoginActivity" />
         <activity android:name=".view.activity.BusinessLoginActivity" />
-        <activity android:name=".constant.BaseActivity" />
         <activity android:name=".view.activity.BusinessRegisterActivity" />
         <activity android:name=".view.activity.BusinessActivity"></activity>
     </application>

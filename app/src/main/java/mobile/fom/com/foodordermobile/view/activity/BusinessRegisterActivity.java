@@ -3,8 +3,6 @@ package mobile.fom.com.foodordermobile.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,13 +11,15 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
+import mobile.fom.com.foodordermobile.util.EditTextUtil;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
 
-public class BusinessRegisterActivity extends AppCompatActivity implements View.OnClickListener, IBusinessRegisterView {
+public class BusinessRegisterActivity extends App implements View.OnClickListener, IBusinessRegisterView {
 
     private static final String TAG = "BusinessRegister";
 
@@ -71,7 +71,7 @@ public class BusinessRegisterActivity extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View view) {
-        if (isEmpty(editTextList)) {
+        if (EditTextUtil.isEmpty(editTextList)) {
             ToastUtil.showToast(this, "有东西没有填哦");
             return;
         }
@@ -91,18 +91,7 @@ public class BusinessRegisterActivity extends AppCompatActivity implements View.
         presenter.businessRegister(business);
     }
 
-    /*
-    判断有没有没输入的内容
-     */
-    private boolean isEmpty(List<EditText> editTextList) {
-        boolean b;
-        for (EditText editText : editTextList) {
-            b = TextUtils.isEmpty(editText.getText().toString().trim());
-            if (b)
-                return true;
-        }
-        return false;
-    }
+
 
 
     @Override

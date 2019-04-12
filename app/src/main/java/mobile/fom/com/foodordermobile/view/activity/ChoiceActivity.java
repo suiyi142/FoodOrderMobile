@@ -1,15 +1,15 @@
 package mobile.fom.com.foodordermobile.view.activity;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
 import mobile.fom.com.foodordermobile.util.SpUtil;
 
-public class ChoiceActivity extends AppCompatActivity {
+public class ChoiceActivity extends App {
 
     private SharedPreferences sp;
 
@@ -18,7 +18,7 @@ public class ChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choise);
         sp = SpUtil.getSharedPreperence(this);
-        int state = sp.getInt(FoodOrderConstant.CHOICE_TATE, FoodOrderConstant.STATE_NULL);
+        int state = sp.getInt(FoodOrderConstant.CHOICE_STATE, FoodOrderConstant.STATE_NULL);
         if (state == FoodOrderConstant.STATE_BUSINESS)
             BusinessLoginActivity.startActivity(this);
         else if (state == FoodOrderConstant.STATE_USER)
@@ -31,7 +31,7 @@ public class ChoiceActivity extends AppCompatActivity {
      */
     public void toBusiness(View view) {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(FoodOrderConstant.CHOICE_TATE, FoodOrderConstant.STATE_BUSINESS);
+        editor.putInt(FoodOrderConstant.CHOICE_STATE, FoodOrderConstant.STATE_BUSINESS);
         editor.apply();
         BusinessLoginActivity.startActivity(this);
 
@@ -42,7 +42,7 @@ public class ChoiceActivity extends AppCompatActivity {
      */
     public void toUser(View view) {
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(FoodOrderConstant.CHOICE_TATE, FoodOrderConstant.STATE_USER);
+        editor.putInt(FoodOrderConstant.CHOICE_STATE, FoodOrderConstant.STATE_USER);
         editor.apply();
         UserLoginActivity.startActivity(this);
     }

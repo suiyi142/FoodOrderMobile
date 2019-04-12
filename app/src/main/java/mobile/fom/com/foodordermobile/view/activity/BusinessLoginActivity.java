@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -22,13 +21,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 
-public class BusinessLoginActivity extends AppCompatActivity implements IBusinessLoginView, View.OnClickListener, AdapterView.OnItemClickListener {
+public class BusinessLoginActivity extends App implements IBusinessLoginView, View.OnClickListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "BusinessLogin";
     private BusinessPresenter presenter;
