@@ -243,12 +243,18 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
                         , cb_user_autoLogin.isChecked()
                         , et_user_login_account.getText().toString().trim()
                         , et_user_login_password.getText().toString().trim());
+                UserActivity.startActivity(UserLoginActivity.this,user);
 
 
             }
         });
     }
 
+    /**
+     * 登录失败
+     *
+     * @param msg 返回失败原因
+     */
     @Override
     public void loginFailed(final String msg) {
         runOnUiThread(new Thread() {
@@ -259,6 +265,9 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
         });
     }
 
+    /**
+     * 注册成功
+     */
     @Override
     public void registerSuccess() {
         runOnUiThread(new Thread() {
@@ -272,6 +281,11 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
         });
     }
 
+    /**
+     * 注册失败
+     *
+     * @param msg 失败原因
+     */
     @Override
     public void registerFailed(final String msg) {
         runOnUiThread(new Thread() {
@@ -290,7 +304,7 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
         et_user_login_account.setText(account);
         if (remember)
             et_user_login_password.setText(password);
-        if (auto_login){
+        if (auto_login) {
             String login_account = et_user_login_account.getText().toString().trim();
             String login_password = et_user_login_password.getText().toString().trim();
             presenter.login(login_account, login_password);

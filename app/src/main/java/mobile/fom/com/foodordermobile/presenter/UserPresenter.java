@@ -1,22 +1,47 @@
 package mobile.fom.com.foodordermobile.presenter;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
+import mobile.fom.com.foodordermobile.bean.Business;
+import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.bean.User;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.model.IUserModel;
-import mobile.fom.com.foodordermobile.model.UserModel;
+import mobile.fom.com.foodordermobile.model.model.UserModel;
+import mobile.fom.com.foodordermobile.view.IUserGoodsView;
 import mobile.fom.com.foodordermobile.view.IUserLoginRegisterView;
+import mobile.fom.com.foodordermobile.view.IUserView;
 
 public class UserPresenter {
+
+    private static final String TAG = "UserPresenter";
+
     private IUserModel mUserModel;
     private IUserLoginRegisterView mUserLoginRegisterView;
+    private IUserView mUserView;
+    private IUserGoodsView mUserGoodsView;
 
     public UserPresenter(IUserLoginRegisterView mUserLoginRegisterView) {
         this.mUserLoginRegisterView = mUserLoginRegisterView;
+        getUserModel();
+    }
+
+    public UserPresenter(IUserView mUserView) {
+        this.mUserView = mUserView;
+        getUserModel();
+    }
+
+    public UserPresenter(IUserGoodsView mUserGoodsView) {
+        this.mUserGoodsView = mUserGoodsView;
         getUserModel();
     }
 
@@ -93,6 +118,65 @@ public class UserPresenter {
         String account = (String) map.get(FoodOrderConstant.REMEMBER_ACCOUNT);
         String password = (String) map.get(FoodOrderConstant.REMEMBER_PASSWORD);
         mUserLoginRegisterView.setCheckBoxState(remember, auto_login, account, password);
+    }
+
+    /**
+     * 获取商家列表
+     */
+    public void getBusiness() {
+        mUserModel.findBusiness(new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                ArrayList<Business> businessList = gson.fromJson(msg, new TypeToken<ArrayList<Business>>() {
+                }.getType());
+                mUserView.setBusinessList(businessList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mUserView.showGetBusinessFailed(msg);
+            }
+        });
+    }
+
+    /**
+     * 获取商品列表
+     */
+    public void getGoods(String b_id) {
+        mUserModel.findGoods(b_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                ArrayList<Goods> goodsList = gson.fromJson(msg, new TypeToken<ArrayList<Goods>>() {
+                }.getType());
+                mUserGoodsView.setGoodsList(goodsList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mUserGoodsView.showGetGoodsFailed(msg);
+            }
+        });
+    }
+
+    /*
+    提交订单
+     */
+    public void commitOrder(String u_id, String b_id, Collection<Goods> list, String other) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        mUserModel.commitOrder(u_id, b_id, json, other, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
     }
 
     /*

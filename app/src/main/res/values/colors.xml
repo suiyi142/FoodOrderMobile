@@ -3,9 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="title_red">#fc404e</color>
     <color name="white">#fff</color>
     <color name="transparent">#00000000</color>
     <color name="view_line">#F7F7F9</color>
     <color name="media">#EA6D78</color>
+    <color name="line">#dddddd</color>
     <color name="gray">#999</color>
+    <color name="black">#000</color>
 </resources>

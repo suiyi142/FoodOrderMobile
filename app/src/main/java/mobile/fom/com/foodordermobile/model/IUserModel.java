@@ -13,5 +13,9 @@ public interface IUserModel {
 
     void saveLoginState(boolean remember, boolean autoLogin, String account, String password);
 
+    void findGoods(String b_id, IModelCallBack callBack);
+
+    public void commitOrder(String u_id, String b_id, String jsonList, String other, IModelCallBack callBack);
+
     HashMap<String, Object> getLoginState();
 }

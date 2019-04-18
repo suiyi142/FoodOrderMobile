@@ -1,4 +1,4 @@
-package mobile.fom.com.foodordermobile.model;
+package mobile.fom.com.foodordermobile.model.model;
 
 import android.util.Log;
 
@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
+import mobile.fom.com.foodordermobile.model.IBusinessModel;
+import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.util.HttpUtil;
 import okhttp3.Call;
 import okhttp3.Callback;

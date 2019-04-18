@@ -1,6 +1,8 @@
 package mobile.fom.com.foodordermobile.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	private String account;
 	private String name;
 	private String password;

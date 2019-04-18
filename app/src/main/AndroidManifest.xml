@@ -23,7 +23,9 @@
         <activity android:name=".view.activity.UserLoginActivity" />
         <activity android:name=".view.activity.BusinessLoginActivity" />
         <activity android:name=".view.activity.BusinessRegisterActivity" />
-        <activity android:name=".view.activity.BusinessActivity"></activity>
+        <activity android:name=".view.activity.BusinessActivity" />
+        <activity android:name=".view.activity.UserActivity" />
+        <activity android:name=".view.activity.UserFoodActivity"></activity>
     </application>
 
 </manifest>

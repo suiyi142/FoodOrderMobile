@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 import mobile.fom.com.foodordermobile.bean.Business;
-import mobile.fom.com.foodordermobile.model.BusinessModel;
+import mobile.fom.com.foodordermobile.model.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;

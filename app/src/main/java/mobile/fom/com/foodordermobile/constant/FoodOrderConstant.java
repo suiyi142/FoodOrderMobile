@@ -30,4 +30,10 @@ public class FoodOrderConstant {
     public static final String U_USER_LOGIN = "UserServlet?method=login";
     //用户注册
     public static final String U_USER_REGISTER = "UserServlet?method=register";
+    //获取商家列表
+    public static final String U_FIND_BUSINESS = "/UserServlet?method=findBusiness";
+    //获取商品列表
+    public static final String U_FIND_GOODS = "/UserServlet?method=findGoods";
+    //提交订单
+    public static final String U_COMMIT_ORDER = "/UserServlet?method=sendOrder";
 }

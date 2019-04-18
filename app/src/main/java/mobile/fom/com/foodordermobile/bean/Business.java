@@ -1,6 +1,8 @@
 package mobile.fom.com.foodordermobile.bean;
 
-public class Business {
+import java.io.Serializable;
+
+public class Business implements Serializable {
 	private String b_id;
 	private String address;
 	private String password;

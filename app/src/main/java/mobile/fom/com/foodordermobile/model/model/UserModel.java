@@ -1,14 +1,15 @@
-package mobile.fom.com.foodordermobile.model;
+package mobile.fom.com.foodordermobile.model.model;
 
 import android.content.SharedPreferences;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.bean.User;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
+import mobile.fom.com.foodordermobile.model.IModelCallBack;
+import mobile.fom.com.foodordermobile.model.IUserModel;
 import mobile.fom.com.foodordermobile.util.HttpUtil;
 import mobile.fom.com.foodordermobile.util.SpUtil;
 import okhttp3.Call;
@@ -69,8 +70,22 @@ public class UserModel implements IUserModel {
     }
 
     @Override
-    public void findBusiness(IModelCallBack callBack) {
-        //TODO
+    public void findBusiness(final IModelCallBack callBack) {
+        HttpUtil.sendHttpRequest(FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_FIND_BUSINESS, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connection wrong");
+                e.printStackTrace();
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String body = response.body() != null ? response.body().string() : null;
+                callBack.onSuccess(body);
+
+            }
+        });
     }
 
     /**
@@ -91,6 +106,64 @@ public class UserModel implements IUserModel {
         editor.apply();
     }
 
+    /**
+     * 获取商品列表
+     *
+     * @param b_id
+     */
+    @Override
+    public void findGoods(String b_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_FIND_GOODS;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connection error");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
+    /**
+     * 提交订单
+     *
+     * @param u_id     用户id
+     * @param b_id     商家id
+     * @param jsonList 商品列表
+     * @param other    备注
+     */
+    @Override
+    public void commitOrder(String u_id, String b_id, String jsonList, String other,final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_COMMIT_ORDER;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("u_id", u_id);
+        map.put("b_id", b_id);
+        map.put("goods_json", jsonList);
+        map.put("other", other);
+
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connection error");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
+    /**
+     * 获取本地登录状态
+     *
+     * @return 登录状态K, V
+     */
     @Override
     public HashMap<String, Object> getLoginState() {
         HashMap<String, Object> map = new HashMap<>();
