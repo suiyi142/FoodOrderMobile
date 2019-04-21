@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -28,7 +29,7 @@ import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 
-public class BusinessLoginActivity extends App implements IBusinessLoginView, View.OnClickListener, AdapterView.OnItemClickListener {
+public class BusinessLoginActivity extends App implements IBusinessLoginView, View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "BusinessLogin";
     private BusinessPresenter presenter;
@@ -44,6 +45,7 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     private Button bt_login_business;
 
     private int selectBusiness;
+    private SwipeRefreshLayout srl_business_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,8 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
         bt_to_business_register = findViewById(R.id.bt_to_business_register);
         tv_business_null = findViewById(R.id.tv_business_null);
         bt_to_business_register.setOnClickListener(this);
+        srl_business_login = findViewById(R.id.srl_business_login);
+        srl_business_login.setOnRefreshListener(this);
     }
 
     /*
@@ -107,6 +111,8 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
         runOnUiThread(new Thread() {
             @Override
             public void run() {
+                if (srl_business_login.isRefreshing())
+                    srl_business_login.setRefreshing(false);
                 progressDialog.dismiss();
                 lv_login_business.setVisibility(View.VISIBLE);
                 lv_login_business.setAdapter(adapter);
@@ -149,11 +155,12 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     @Override
     public void toBusiness(final Business business) {
         progressDialog.dismiss();
-        runOnUiThread(new Thread(){
+        runOnUiThread(new Thread() {
             @Override
             public void run() {
-                ToastUtil.showToast(BusinessLoginActivity.this,"登陆成功");
-                Log.i(TAG,business.toString());
+                ToastUtil.showToast(BusinessLoginActivity.this, "登陆成功");
+                Log.i(TAG, business.toString());
+                BusinessActivity.startActivity(BusinessLoginActivity.this, business);
             }
         });
 
@@ -162,10 +169,10 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     @Override
     public void showLoginErrorMsg(final String msg) {
         progressDialog.dismiss();
-        runOnUiThread(new Thread(){
+        runOnUiThread(new Thread() {
             @Override
             public void run() {
-                ToastUtil.showToast(BusinessLoginActivity.this,msg);
+                ToastUtil.showToast(BusinessLoginActivity.this, msg);
             }
         });
     }
@@ -185,11 +192,11 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
                 progressDialog.show();
                 String b_id = list.get(selectBusiness).getB_id();
                 String password = et_login_business_password.getText().toString().trim();
-                if (TextUtils.isEmpty(b_id)||TextUtils.isEmpty(password)){
-                    ToastUtil.showToast(this,"密码或账号为空");
+                if (TextUtils.isEmpty(b_id) || TextUtils.isEmpty(password)) {
+                    ToastUtil.showToast(this, "密码或账号为空");
                     break;
                 }
-                presenter.businessLogin(b_id,password);
+                presenter.businessLogin(b_id, password);
         }
     }
 
@@ -206,5 +213,13 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         selectBusiness = i;
         passwordDialog.show();
+    }
+
+    /*
+    下拉刷新监听
+     */
+    @Override
+    public void onRefresh() {
+        presenter.findBusiness();
     }
 }

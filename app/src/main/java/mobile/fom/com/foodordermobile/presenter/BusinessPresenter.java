@@ -4,21 +4,30 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mobile.fom.com.foodordermobile.bean.Business;
+import mobile.fom.com.foodordermobile.bean.Order;
 import mobile.fom.com.foodordermobile.model.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
+import mobile.fom.com.foodordermobile.view.IBusinessOrderView;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
 
 public class BusinessPresenter {
     private IBusinessModel mBusinessModel;
     private IBusinessLoginView mBusinessLoginView;
     private IBusinessRegisterView mBusinessRegisterView;
+    private IBusinessOrderView mBusinessOrderView;
 
     public BusinessPresenter(IBusinessLoginView mBusinessView) {
         this.mBusinessLoginView = mBusinessView;
+        getBusinessModel();
+    }
+
+    public BusinessPresenter(IBusinessOrderView mBusinessOrderView) {
+        this.mBusinessOrderView = mBusinessOrderView;
         getBusinessModel();
     }
 
@@ -93,6 +102,38 @@ public class BusinessPresenter {
             @Override
             public void onFailure(String msg) {
                 mBusinessLoginView.showLoginErrorMsg(msg);
+            }
+        });
+    }
+
+    public void getOldOrder(String b_id){
+        mBusinessModel.getOldOrder(b_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                List<Order> orderList = gson.fromJson(msg,new TypeToken<List<Order>>(){}.getType());
+                mBusinessOrderView.showOrder(orderList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessOrderView.showError(msg);
+            }
+        });
+    }
+
+    public void getNewOrder(String b_id){
+        mBusinessModel.getNewOrder(b_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                List<Order> orderList = gson.fromJson(msg,new TypeToken<List<Order>>(){}.getType());
+                mBusinessOrderView.showOrder(orderList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessOrderView.showError(msg);
             }
         });
     }

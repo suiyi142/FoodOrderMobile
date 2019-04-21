@@ -21,14 +21,21 @@
         android:textColor="#fff"
         android:textSize="20sp" />
 
-    <ListView
-        android:id="@+id/lv_login_business"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_business_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bt_to_business_register"
-        android:layout_margin="20dp"
-        android:textColor="#fff"
-        android:visibility="gone" />
+        android:layout_above="@+id/bt_to_business_register">
+
+        <ListView
+            android:id="@+id/lv_login_business"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:textColor="#fff"
+            android:visibility="gone" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <TextView
         android:id="@+id/tv_business_null"

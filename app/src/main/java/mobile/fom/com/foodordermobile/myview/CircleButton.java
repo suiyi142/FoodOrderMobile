@@ -59,7 +59,8 @@ public class CircleButton extends View {
                 参数三：圆的半径
                 参数四：定义好的画笔
                 */
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, 200, paint);
+        int r = getWidth()<getHeight()?getWidth():getHeight();
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, r/2, paint);
         paint.setColor(textColor);
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.CENTER);

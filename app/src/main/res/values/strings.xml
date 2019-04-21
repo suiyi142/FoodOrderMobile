@@ -21,4 +21,6 @@
     <string name="address_hint">请输入店铺地址</string>
     <string name="JoinUs">加入我们</string>
     <string name="name_hint">请输入姓名</string>
+    <string name="order_history">历史订单</string>
+    <string name="order_now">实时订单</string>
 </resources>

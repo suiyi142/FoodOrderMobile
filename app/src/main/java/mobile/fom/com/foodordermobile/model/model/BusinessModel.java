@@ -43,6 +43,9 @@ public class BusinessModel implements IBusinessModel {
         });
     }
 
+    /*
+    注册
+     */
     @Override
     public void register(Business business, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_REGISTER;
@@ -65,12 +68,57 @@ public class BusinessModel implements IBusinessModel {
 
     }
 
+    /*
+    登录
+     */
     @Override
     public void login(String b_id, String password, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_LOGIN;
         HashMap<String, String> map = new HashMap<>();
         map.put("b_id", b_id);
         map.put("password", password);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
+    /*
+    获取历史订单
+     */
+    @Override
+    public void getOldOrder(String b_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_GET_OLD_ORDER;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
+    /*
+    获取实时订单
+     */
+    @Override
+    public void getNewOrder(String b_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_GET_NEW_ORDER;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
         HttpUtil.sendHttpRequest(url, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

@@ -24,6 +24,10 @@ public class FoodOrderConstant {
     public static final String B_BUSINESS_REGISTER = "BusinessServlet?method=register";
     //商家登录
     public static final String B_BUSINESS_LOGIN = "BusinessServlet?method=login";
+    //获取历史订单
+    public static final String B_BUSINESS_GET_OLD_ORDER = "BusinessServlet?method=getOldOrder";
+    //获取新订单
+    public static final String B_BUSINESS_GET_NEW_ORDER = "BusinessServlet?method=getNewOrder";
 
     //------------------------用户--------------------------
     //用户登录

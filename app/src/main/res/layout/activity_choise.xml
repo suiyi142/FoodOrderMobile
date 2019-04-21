@@ -8,25 +8,31 @@
     android:background="@mipmap/bg_choice"
     tools:context=".view.activity.ChoiceActivity">
 
-    <mobile.fom.com.foodordermobile.myview.CircleButton
-        android:id="@+id/bt_to_business"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:onClick="toBusiness"
-        app:color="#00f"
-        app:mTextColor="#fff"
-        app:myText="我是商家" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-    <mobile.fom.com.foodordermobile.myview.CircleButton
-        android:id="@+id/bt_to_user"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_below="@+id/bt_to_business"
-        android:layout_centerHorizontal="true"
-        android:onClick="toUser"
-        android:text="我是"
-        app:color="#f00"
-        app:mTextColor="#fff"
-        app:myText="我是用户" />
+        <mobile.fom.com.foodordermobile.myview.CircleButton
+            android:id="@+id/bt_to_business"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:onClick="toBusiness"
+            app:color="#00f"
+            app:mTextColor="#fff"
+            app:myText="我是商家" />
+
+        <mobile.fom.com.foodordermobile.myview.CircleButton
+            android:id="@+id/bt_to_user"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:onClick="toUser"
+            app:color="#f00"
+            app:mTextColor="#fff"
+            app:myText="我是用户" />
+    </LinearLayout>
+
+
 </RelativeLayout>
