@@ -10,7 +10,7 @@ public class Goods implements Serializable {
 	private String photo;
 	private String other;
 	private int num;
-	
+
 	public Goods() {
 		super();
 	}
@@ -90,8 +90,8 @@ public class Goods implements Serializable {
 		this.num = num;
 	}
 
-	
 
-	
+
+
 
 }

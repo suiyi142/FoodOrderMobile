@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.adapter.BusinessOrderAdapter;
@@ -81,8 +82,12 @@ public class BusinessOrderNowFragment extends Fragment implements IBusinessOrder
 
     @Override
     public void onClick(View view) {
-        srl_business_order_now.setRefreshing(true);
-        presenter.getNewOrder(business.getB_id());
+        switch ( view.getId()){
+            case R.id.cb_research:
+                srl_business_order_now.setRefreshing(true);
+                presenter.getNewOrder(business.getB_id());
+                break;
+        }
     }
 //-------------------------回调-----------------------------------
 
@@ -93,7 +98,7 @@ public class BusinessOrderNowFragment extends Fragment implements IBusinessOrder
      */
     @Override
     public void showOrder(final List<Order> newOrderList) {
-        getActivity().runOnUiThread(new Runnable() {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (srl_business_order_now.isRefreshing())
@@ -114,7 +119,7 @@ public class BusinessOrderNowFragment extends Fragment implements IBusinessOrder
      */
     @Override
     public void showError(final String msg) {
-        getActivity().runOnUiThread(new Runnable() {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 ToastUtil.showToast(BusinessOrderNowFragment.this.getContext(), msg);

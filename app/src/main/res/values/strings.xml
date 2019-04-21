@@ -23,4 +23,7 @@
     <string name="name_hint">请输入姓名</string>
     <string name="order_history">历史订单</string>
     <string name="order_now">实时订单</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

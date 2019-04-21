@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.BusinessAddGoodsActivity">
+
+    <ImageView
+        android:id="@+id/iv_business_add"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/add" />
+
+    <TextView
+        android:id="@+id/tv_business_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_business_add"
+        android:layout_centerHorizontal="true"
+        android:text="点击添加图片"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_business_add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_business_add"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_add_circle"
+        android:hint="商品名称" />
+
+    <EditText
+        android:id="@+id/et_business_add_price"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_business_add_name"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_add_circle"
+        android:hint="价格" />
+
+    <EditText
+        android:id="@+id/et_business_add_other"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:maxLines="3"
+        android:layout_below="@+id/et_business_add_price"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_add_circle"
+        android:hint="价格" />
+
+</RelativeLayout>

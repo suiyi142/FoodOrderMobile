@@ -5,17 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Business;
-import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.fragment.BusinessOrderNowFragment;
 import mobile.fom.com.foodordermobile.view.fragment.BusinessOrderOldFragment;
 
-public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeListener {
+public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private Business business;
     private RadioGroup rb_business_bottom;
@@ -23,6 +23,9 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
     private BusinessOrderOldFragment oldFragment;
     private FragmentManager manager;
     private TextView tv_business_order_state;
+    private TextView tv_business_seats;
+    private TextView tv_add_goods;
+    private TextView tv_business_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,12 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fl_business, nowFragment);
         transaction.commit();
+        tv_business_seats = findViewById(R.id.tv_business_seats);
+        tv_business_seats.setText("剩余座位" + business.getCurrent_seats());
+        tv_add_goods = findViewById(R.id.tv_add_goods);
+        tv_add_goods.setOnClickListener(this);
+        tv_business_exit = findViewById(R.id.tv_business_exit);
+        tv_business_exit.setOnClickListener(this);
     }
 
     /*
@@ -73,5 +82,28 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
                 transaction.commit();
                 break;
         }
+    }
+
+    /**
+     * 设置座位
+     *
+     * @param business
+     */
+    public void setSeats(Business business) {
+        this.business = business;
+        tv_business_seats.setText("剩余座位" + business.getCurrent_seats());
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_business_exit:
+                this.finish();
+                break;
+            case R.id.tv_add_goods:
+                BusinessAddGoodsActivity.startActivity(this, business);
+                break;
+        }
+
     }
 }

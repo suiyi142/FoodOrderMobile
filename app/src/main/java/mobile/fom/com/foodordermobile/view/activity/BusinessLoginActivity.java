@@ -161,6 +161,7 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
                 ToastUtil.showToast(BusinessLoginActivity.this, "登陆成功");
                 Log.i(TAG, business.toString());
                 BusinessActivity.startActivity(BusinessLoginActivity.this, business);
+                BusinessLoginActivity.this.finish();
             }
         });
 
