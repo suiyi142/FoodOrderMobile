@@ -26,7 +26,7 @@ public class BusinessAllGoodsActivity extends AppCompatActivity implements Swipe
     private SwipeRefreshLayout srf_goods;
     private RecyclerView rcv_goods;
     private BusinessPresenter presenter;
-    private ArrayList<Goods> goodsArrayList = new ArrayList<>();
+    private List<Goods> goodsArrayList = new ArrayList<>();
     private BusinessGoodsAdapter adapter;
 
     @Override
@@ -76,7 +76,7 @@ public class BusinessAllGoodsActivity extends AppCompatActivity implements Swipe
                 if (srf_goods.isRefreshing())
                     srf_goods.setRefreshing(false);
                 goodsArrayList.clear();
-                goodsList.addAll(goodsList);
+                goodsArrayList.addAll(goodsList);
                 adapter.notifyDataSetChanged();
             }
         });

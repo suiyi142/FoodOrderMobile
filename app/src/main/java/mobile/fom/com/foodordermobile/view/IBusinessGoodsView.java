@@ -7,15 +7,15 @@ public interface IBusinessGoodsView {
     /**
      * 修改成功
      *
-     * @param goods 返回修改的goods
+     * @param msg
      */
-    void changeSuccess(Goods goods);
+    void changeSuccess(final String msg);
 
     /**
      * 修改失败
      *
      * @param msg 失败信息
      */
-    void changeFailed(String msg);
+    void changeFailed(final String msg);
 
 }

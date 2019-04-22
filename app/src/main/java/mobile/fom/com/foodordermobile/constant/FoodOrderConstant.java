@@ -28,6 +28,10 @@ public class FoodOrderConstant {
     public static final String B_BUSINESS_GET_OLD_ORDER = "BusinessServlet?method=getOldOrder";
     //获取新订单
     public static final String B_BUSINESS_GET_NEW_ORDER = "BusinessServlet?method=getNewOrder";
+    //获取所有商品
+    public static final String B_BUSINESS_GET_ALL_GOODS = "BusinessServlet?method=findGoods";
+    //添加商品
+    public static final String B_BUSINESS_ADD_GOODS = "BusinessServlet?method=addGoods";
 
     //------------------------用户--------------------------
     //用户登录

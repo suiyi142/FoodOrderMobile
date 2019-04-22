@@ -176,11 +176,10 @@ public class BusinessPresenter {
         mBusinessModel.addGoods(b_id, g_name, g_price, g_other, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
-                if (msg.equals("0")) {
-                    mBusinessGoodsView.changeFailed("添加失败");
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("添加成功");
                 } else {
-                    Goods goods = new Gson().fromJson(msg, Goods.class);
-                    mBusinessGoodsView.changeSuccess(goods);
+                    mBusinessGoodsView.changeFailed(msg);
                 }
 
             }
@@ -192,8 +191,23 @@ public class BusinessPresenter {
         });
     }
 
+    /*
+    查找所有商品
+     */
     public void getAllGoods(String b_id){
+        mBusinessModel.getAllGoods(b_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                List<Goods> goods = gson.fromJson(msg,new TypeToken<List<Goods>>(){}.getType());
+                mBusinessAllGoodsView.setGoodsList(goods);
+            }
 
+            @Override
+            public void onFailure(String msg) {
+                mBusinessAllGoodsView.showErrorMsg(msg);
+            }
+        });
     }
 
 

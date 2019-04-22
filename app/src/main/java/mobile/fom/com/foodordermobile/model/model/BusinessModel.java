@@ -136,16 +136,46 @@ public class BusinessModel implements IBusinessModel {
     添加商品
      */
     @Override
-    public void addGoods(String b_id, String g_name, String g_price, String g_other, IModelCallBack callBack) {
-        //TODO 添加商品实现
+    public void addGoods(String b_id, String g_name, String g_price, String g_other, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_ADD_GOODS;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        map.put("name", g_name);
+        map.put("price", g_price);
+        map.put("other", g_other);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+
     }
 
     /*
     获取所有商品
      */
     @Override
-    public void getAllGoods(String b_id, IModelCallBack callBack) {
-        //TODO 获取所有商品实现
+    public void getAllGoods(String b_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_GET_ALL_GOODS;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
 }

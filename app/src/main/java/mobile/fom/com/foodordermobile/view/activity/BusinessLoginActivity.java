@@ -158,6 +158,7 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
         runOnUiThread(new Thread() {
             @Override
             public void run() {
+                passwordDialog.dismiss();
                 ToastUtil.showToast(BusinessLoginActivity.this, "登陆成功");
                 Log.i(TAG, business.toString());
                 BusinessActivity.startActivity(BusinessLoginActivity.this, business);

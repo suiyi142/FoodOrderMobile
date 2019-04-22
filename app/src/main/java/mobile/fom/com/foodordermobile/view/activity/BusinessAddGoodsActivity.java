@@ -79,12 +79,23 @@ public class BusinessAddGoodsActivity extends AppCompatActivity implements View.
 
     //------------------------------接口回调-----------------------
     @Override
-    public void changeSuccess(Goods goods) {
-
+    public void changeSuccess(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(BusinessAddGoodsActivity.this,msg);
+                BusinessAddGoodsActivity.this.finish();
+            }
+        });
     }
 
     @Override
-    public void changeFailed(String msg) {
-
+    public void changeFailed(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(BusinessAddGoodsActivity.this,msg);
+            }
+        });
     }
 }

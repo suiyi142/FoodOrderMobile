@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Goods;
 
 public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdapter.ViewHolder> {
 
-    private ArrayList<Goods> goodsArrayList;
+    private List<Goods> goodsList;
 
-    public BusinessGoodsAdapter(ArrayList<Goods> goodsArrayList) {
-        this.goodsArrayList = goodsArrayList;
+    public BusinessGoodsAdapter(List<Goods> goodsArrayList) {
+        this.goodsList = goodsArrayList;
     }
 
     @NonNull
@@ -31,17 +31,17 @@ public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Goods goods = goodsArrayList.get(i);
+        Goods goods = goodsList.get(i);
         viewHolder.tv_name.setText(goods.getName());
         viewHolder.tv_other.setText(goods.getOther());
-        String price = "￥" + String.format("%.2f", goods.getPrice());
+        String price = "￥" +  goods.getPrice();
         viewHolder.tv_price.setText(price);
 
     }
 
     @Override
     public int getItemCount() {
-        return goodsArrayList.size();
+        return goodsList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
