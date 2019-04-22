@@ -132,4 +132,20 @@ public class BusinessModel implements IBusinessModel {
         });
     }
 
+    /*
+    添加商品
+     */
+    @Override
+    public void addGoods(String b_id, String g_name, String g_price, String g_other, IModelCallBack callBack) {
+        //TODO 添加商品实现
+    }
+
+    /*
+    获取所有商品
+     */
+    @Override
+    public void getAllGoods(String b_id, IModelCallBack callBack) {
+        //TODO 获取所有商品实现
+    }
+
 }

@@ -7,19 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobile.fom.com.foodordermobile.bean.Business;
+import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.bean.Order;
 import mobile.fom.com.foodordermobile.model.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
+import mobile.fom.com.foodordermobile.view.IBusinessAllGoodsView;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 import mobile.fom.com.foodordermobile.view.IBusinessOrderView;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
+import mobile.fom.com.foodordermobile.view.IBusinessGoodsView;
 
 public class BusinessPresenter {
     private IBusinessModel mBusinessModel;
     private IBusinessLoginView mBusinessLoginView;
     private IBusinessRegisterView mBusinessRegisterView;
     private IBusinessOrderView mBusinessOrderView;
+    private IBusinessGoodsView mBusinessGoodsView;
+    private IBusinessAllGoodsView mBusinessAllGoodsView;
 
     public BusinessPresenter(IBusinessLoginView mBusinessView) {
         this.mBusinessLoginView = mBusinessView;
@@ -34,6 +39,24 @@ public class BusinessPresenter {
     public BusinessPresenter(IBusinessRegisterView mBusinessRegisterView) {
         this.mBusinessRegisterView = mBusinessRegisterView;
         getBusinessModel();
+    }
+
+    public BusinessPresenter(IBusinessGoodsView mBusinessGoodsView) {
+        this.mBusinessGoodsView = mBusinessGoodsView;
+        getBusinessModel();
+    }
+
+    public BusinessPresenter(IBusinessAllGoodsView mBusinessAllGoodsView) {
+        this.mBusinessAllGoodsView = mBusinessAllGoodsView;
+        getBusinessModel();
+    }
+
+    /*
+    懒汉式创建model
+    */
+    private void getBusinessModel() {
+        if (mBusinessModel == null)
+            mBusinessModel = new BusinessModel();
     }
 
     /**
@@ -106,28 +129,16 @@ public class BusinessPresenter {
         });
     }
 
-    public void getOldOrder(String b_id){
+    /*
+    获取历史订单
+     */
+    public void getOldOrder(String b_id) {
         mBusinessModel.getOldOrder(b_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 Gson gson = new Gson();
-                List<Order> orderList = gson.fromJson(msg,new TypeToken<List<Order>>(){}.getType());
-                mBusinessOrderView.showOrder(orderList);
-            }
-
-            @Override
-            public void onFailure(String msg) {
-                mBusinessOrderView.showError(msg);
-            }
-        });
-    }
-
-    public void getNewOrder(String b_id){
-        mBusinessModel.getNewOrder(b_id, new IModelCallBack() {
-            @Override
-            public void onSuccess(String msg) {
-                Gson gson = new Gson();
-                List<Order> orderList = gson.fromJson(msg,new TypeToken<List<Order>>(){}.getType());
+                List<Order> orderList = gson.fromJson(msg, new TypeToken<List<Order>>() {
+                }.getType());
                 mBusinessOrderView.showOrder(orderList);
             }
 
@@ -139,10 +150,51 @@ public class BusinessPresenter {
     }
 
     /*
-    懒汉式创建model
+    获取新订单
      */
-    private void getBusinessModel() {
-        if (mBusinessModel == null)
-            mBusinessModel = new BusinessModel();
+    public void getNewOrder(String b_id) {
+        mBusinessModel.getNewOrder(b_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                Gson gson = new Gson();
+                List<Order> orderList = gson.fromJson(msg, new TypeToken<List<Order>>() {
+                }.getType());
+                mBusinessOrderView.showOrder(orderList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessOrderView.showError(msg);
+            }
+        });
     }
+
+    /*
+    增加商品
+     */
+    public void addGoods(String b_id, String g_name, String g_price, String g_other) {
+        mBusinessModel.addGoods(b_id, g_name, g_price, g_other, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("0")) {
+                    mBusinessGoodsView.changeFailed("添加失败");
+                } else {
+                    Goods goods = new Gson().fromJson(msg, Goods.class);
+                    mBusinessGoodsView.changeSuccess(goods);
+                }
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
+            }
+        });
+    }
+
+    public void getAllGoods(String b_id){
+
+    }
+
+
 }

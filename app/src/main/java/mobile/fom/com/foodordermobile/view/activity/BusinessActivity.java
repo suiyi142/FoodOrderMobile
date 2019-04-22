@@ -26,6 +26,7 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
     private TextView tv_business_seats;
     private TextView tv_add_goods;
     private TextView tv_business_exit;
+    private TextView tv_show_goods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
         tv_add_goods.setOnClickListener(this);
         tv_business_exit = findViewById(R.id.tv_business_exit);
         tv_business_exit.setOnClickListener(this);
+        tv_show_goods = findViewById(R.id.tv_show_goods);
+        tv_show_goods.setOnClickListener(this);
     }
 
     /*
@@ -102,6 +105,9 @@ public class BusinessActivity extends App implements RadioGroup.OnCheckedChangeL
                 break;
             case R.id.tv_add_goods:
                 BusinessAddGoodsActivity.startActivity(this, business);
+                break;
+            case R.id.tv_show_goods:
+                BusinessAllGoodsActivity.startActivity(this,business);
                 break;
         }
 

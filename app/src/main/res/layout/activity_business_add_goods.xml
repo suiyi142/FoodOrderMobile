@@ -33,22 +33,31 @@
 
     <EditText
         android:id="@+id/et_business_add_price"
-        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_business_add_name"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_add_circle"
-        android:hint="价格" />
+        android:hint="价格"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/et_business_add_other"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:maxLines="3"
         android:layout_below="@+id/et_business_add_price"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_add_circle"
-        android:hint="价格" />
+        android:hint="商品介绍"
+        android:maxLines="3" />
+
+    <Button
+        android:id="@+id/bt_business_add_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_business_add_other"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_shape"
+        android:text="提交" />
 
 </RelativeLayout>
