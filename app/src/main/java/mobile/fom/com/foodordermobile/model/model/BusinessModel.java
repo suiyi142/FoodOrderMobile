@@ -195,4 +195,28 @@ public class BusinessModel implements IBusinessModel {
         //TODO 删除商品
     }
 
+    /*
+    接单
+     */
+    @Override
+    public void receiptOrder(String o_id, IModelCallBack callBack) {
+        //TODO 接单
+    }
+
+    /*
+    拒单
+    */
+    @Override
+    public void refuseOrder(String o_id, IModelCallBack callBack) {
+        //TODO 拒单
+    }
+
+    /*
+    核销
+    */
+    @Override
+    public void usedOrder(String o_id, IModelCallBack callBack) {
+        //TODO 核销
+    }
+
 }

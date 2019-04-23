@@ -1,6 +1,5 @@
 package mobile.fom.com.foodordermobile.view.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +27,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import mobile.fom.com.foodordermobile.R;
-import mobile.fom.com.foodordermobile.adapter.GoodsAdapter;
+import mobile.fom.com.foodordermobile.adapter.UserGoodsAdapter;
 import mobile.fom.com.foodordermobile.adapter.ProductAdapter;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.bean.Goods;
@@ -60,7 +59,7 @@ public class UserFoodActivity extends AppCompatActivity implements IUserGoodsVie
     Double totalMoney = 0.00;
     private static DecimalFormat df;
     private ArrayList<Goods> goodkList;
-    private GoodsAdapter goodsAdapter;
+    private UserGoodsAdapter goodsAdapter;
     private ProductAdapter productAdapter;
 
 
@@ -364,7 +363,7 @@ public class UserFoodActivity extends AppCompatActivity implements IUserGoodsVie
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                goodsAdapter = new GoodsAdapter(UserFoodActivity.this, goodsList);
+                goodsAdapter = new UserGoodsAdapter(UserFoodActivity.this, goodsList);
                 lv_user_food.setAdapter(goodsAdapter);
             }
         });

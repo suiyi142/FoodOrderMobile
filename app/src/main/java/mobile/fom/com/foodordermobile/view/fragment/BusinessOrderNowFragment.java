@@ -59,7 +59,7 @@ public class BusinessOrderNowFragment extends Fragment implements IBusinessOrder
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rcv_business_order_now.setLayoutManager(layoutManager);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
-        adapter = new BusinessOrderAdapter(orderList);
+        adapter = new BusinessOrderAdapter(orderList, this);
         rcv_business_order_now.setAdapter(adapter);
 
         //获取订单
@@ -82,7 +82,7 @@ public class BusinessOrderNowFragment extends Fragment implements IBusinessOrder
 
     @Override
     public void onClick(View view) {
-        switch ( view.getId()){
+        switch (view.getId()) {
             case R.id.cb_research:
                 srl_business_order_now.setRefreshing(true);
                 presenter.getNewOrder(business.getB_id());

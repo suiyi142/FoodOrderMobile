@@ -21,14 +21,14 @@ import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.view.activity.UserFoodActivity;
 
-public class GoodsAdapter extends BaseAdapter {
+public class UserGoodsAdapter extends BaseAdapter {
 
-    private static final String TAG = "GoodsAdapter";
+    private static final String TAG = "UserGoodsAdapter";
 
     private List<Goods> list;
     private Context context;
 
-    public GoodsAdapter(Context context, List<Goods> list2) {
+    public UserGoodsAdapter(Context context, List<Goods> list2) {
         this.context = context;
         this.list = list2;
     }

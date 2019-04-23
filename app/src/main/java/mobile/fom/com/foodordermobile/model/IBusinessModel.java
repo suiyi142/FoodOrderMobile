@@ -73,9 +73,33 @@ public interface IBusinessModel {
     /**
      * 删除商品
      *
-     * @param b_id
+     * @param o_id
      * @param callBack
      */
-    void deleteGoods(String b_id, final IModelCallBack callBack);
+    void deleteGoods(String o_id, final IModelCallBack callBack);
+
+    /**
+     * 接单
+     *
+     * @param o_id
+     * @param callBack
+     */
+    void receiptOrder(String o_id, final IModelCallBack callBack);
+
+    /**
+     * 拒单
+     *
+     * @param o_id
+     * @param callBack
+     */
+    void refuseOrder(String o_id, final IModelCallBack callBack);
+
+    /**
+     * 核销
+     *
+     * @param o_id
+     * @param callBack
+     */
+    void usedOrder(String o_id, final IModelCallBack callBack);
 
 }

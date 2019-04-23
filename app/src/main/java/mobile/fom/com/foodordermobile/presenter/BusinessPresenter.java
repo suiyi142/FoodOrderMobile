@@ -253,5 +253,68 @@ public class BusinessPresenter {
         });
     }
 
+    /*
+    接单
+     */
+    public void receiptOrder(String o_id) {
+        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("接单成功");
+                } else {
+                    mBusinessGoodsView.changeFailed(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
+            }
+        });
+    }
+
+    /*
+    拒单
+     */
+    public void refuseOrder(String o_id) {
+        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("拒单成功");
+                } else {
+                    mBusinessGoodsView.changeFailed(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
+            }
+        });
+    }
+
+    /*
+    核销
+    */
+    public void usedOrder(String o_id) {
+        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("核销成功");
+                } else {
+                    mBusinessGoodsView.changeFailed(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
+            }
+        });
+    }
+
 
 }

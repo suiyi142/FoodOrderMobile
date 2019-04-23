@@ -1,15 +1,18 @@
 package mobile.fom.com.foodordermobile.bean;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     private String o_id;
     private String b_id;
     private String u_id;
     private String price;
     private String other;
     private int state;
-    public static final int STATE_NEW = 0;
-    public static final int STATE_OLD = 1;
-    public static final int STATE_GONE = 2;
+    public static final int STATE_NEW = 0;      //未接单
+    public static final int STATE_RECEPIT = 1;  //已接单
+    public static final int STATE_USED = 2;     //已核销
+    public static final int STATE_REFUSE = 3;   //已拒绝
 
     public Order() {
         super();

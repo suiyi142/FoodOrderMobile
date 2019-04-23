@@ -23,11 +23,11 @@ import mobile.fom.com.foodordermobile.view.activity.UserFoodActivity;
  * 底部购物车
  */
 public class ProductAdapter extends BaseAdapter {
-    GoodsAdapter goodsAdapter;
+    UserGoodsAdapter goodsAdapter;
     private UserFoodActivity activity;
     private ArrayMap<String,Goods> dataList;
 
-    public ProductAdapter(UserFoodActivity activity, GoodsAdapter goodsAdapter, ArrayMap<String,Goods> dataList) {
+    public ProductAdapter(UserFoodActivity activity, UserGoodsAdapter goodsAdapter, ArrayMap<String,Goods> dataList) {
         this.goodsAdapter = goodsAdapter;
         this.activity = activity;
         this.dataList = dataList;

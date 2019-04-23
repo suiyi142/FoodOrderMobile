@@ -93,6 +93,9 @@ public class BusinessUpdateGoodsActivity extends AppCompatActivity implements Vi
         }
     }
 
+    /*
+    确认删除对话框
+     */
     private void showDialog() {
         new AlertDialog.Builder(this)
                 .setMessage("确定删除？")
