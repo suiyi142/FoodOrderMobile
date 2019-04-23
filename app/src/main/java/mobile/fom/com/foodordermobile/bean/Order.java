@@ -10,7 +10,7 @@ public class Order implements Serializable {
     private String other;
     private int state;
     public static final int STATE_NEW = 0;      //未接单
-    public static final int STATE_RECEPIT = 1;  //已接单
+    public static final int STATE_RECEIPT = 1;  //已接单
     public static final int STATE_USED = 2;     //已核销
     public static final int STATE_REFUSE = 3;   //已拒绝
 

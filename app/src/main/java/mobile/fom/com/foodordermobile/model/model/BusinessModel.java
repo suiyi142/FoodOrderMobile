@@ -174,7 +174,10 @@ public class BusinessModel implements IBusinessModel {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                callBack.onSuccess(response.body().string());
+                String body = response.body().string();
+                //Log.i(TAG,body);
+                callBack.onSuccess(body);
+
             }
         });
     }
@@ -183,40 +186,114 @@ public class BusinessModel implements IBusinessModel {
     修改商品
      */
     @Override
-    public void updateGoods(Goods goods, IModelCallBack callBack) {
-        //TODO 修改商品
+    public void updateGoods(Goods goods, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_UPDATE_GOODS;
+        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        HashMap<String, String> map = new HashMap<>();
+        map.put("g_id", goods.getG_id());
+        map.put("name", goods.getName());
+        map.put("price", goods.getPrice());
+        map.put("other", goods.getOther());
+        //Log.i(TAG,goods.toString());
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
     /*
     删除商品
      */
     @Override
-    public void deleteGoods(String b_id, IModelCallBack callBack) {
-        //TODO 删除商品
+    public void deleteGoods(String g_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_DELETE_GOODS;
+        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        HashMap<String, String> map = new HashMap<>();
+        map.put("g_id", g_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
     /*
     接单
      */
     @Override
-    public void receiptOrder(String o_id, IModelCallBack callBack) {
-        //TODO 接单
+    public void receiptOrder(String o_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_RECEIPT_ORDER;
+        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        HashMap<String, String> map = new HashMap<>();
+        map.put("o_id", o_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
     /*
     拒单
     */
     @Override
-    public void refuseOrder(String o_id, IModelCallBack callBack) {
-        //TODO 拒单
+    public void refuseOrder(String o_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_RECEIPT_ORDER;
+        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        HashMap<String, String> map = new HashMap<>();
+        map.put("o_id", o_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
     /*
     核销
     */
     @Override
-    public void usedOrder(String o_id, IModelCallBack callBack) {
-        //TODO 核销
+    public void usedOrder(String o_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_RECEIPT_ORDER;
+        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        HashMap<String, String> map = new HashMap<>();
+        map.put("o_id", o_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 
 }

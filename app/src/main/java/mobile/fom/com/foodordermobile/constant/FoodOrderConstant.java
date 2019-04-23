@@ -32,6 +32,16 @@ public class FoodOrderConstant {
     public static final String B_BUSINESS_GET_ALL_GOODS = "BusinessServlet?method=findGoods";
     //添加商品
     public static final String B_BUSINESS_ADD_GOODS = "BusinessServlet?method=addGoods";
+    //修改商品
+    public static final String B_BUSINESS_UPDATE_GOODS = "BusinessServlet?method=updateGoods";
+    //删除商品
+    public static final String B_BUSINESS_DELETE_GOODS = "BusinessServlet?method=deleteGoods";
+    //接单
+    public static final String B_BUSINESS_RECEIPT_ORDER = "BusinessServlet?method=receipt";
+    //拒单
+    public static final String B_BUSINESS_REFUSE_ORDER = "BusinessServlet?method=refuse";
+    //核销
+    public static final String B_BUSINESS_USED_ORDER = "BusinessServlet?method=used";
 
     //------------------------用户--------------------------
     //用户登录

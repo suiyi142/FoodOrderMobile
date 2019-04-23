@@ -67,7 +67,7 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
                 bt_oder_used.setVisibility(View.GONE);
                 tv_state.setText("待接单");
                 break;
-            case Order.STATE_RECEPIT:
+            case Order.STATE_RECEIPT:
                 bt_oder_receipt.setVisibility(View.GONE);
                 bt_oder_refuse.setVisibility(View.GONE);
                 bt_oder_used.setVisibility(View.VISIBLE);
@@ -103,7 +103,7 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
                 presenter.receiptOrder(order.getO_id());
                 break;
             case R.id.bt_oder_refuse:
-                presenter.receiptOrder(order.getO_id());
+                presenter.refuseOrder(order.getO_id());
                 break;
             case R.id.bt_oder_used:
                 presenter.usedOrder(order.getO_id());

@@ -1,5 +1,6 @@
 package mobile.fom.com.foodordermobile.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
         final Goods goods = goodsList.get(i);
         viewHolder.tv_name.setText(goods.getName());
         viewHolder.tv_other.setText(goods.getOther());
@@ -41,7 +42,7 @@ public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdap
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BusinessUpdateGoodsActivity.startActivity(viewHolder.itemView.getContext(), goods);
+                BusinessUpdateGoodsActivity.startActivity(viewHolder.itemView.getContext(), goodsList.get(i));
             }
         });
 

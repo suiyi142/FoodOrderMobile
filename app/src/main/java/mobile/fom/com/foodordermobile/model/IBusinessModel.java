@@ -73,10 +73,10 @@ public interface IBusinessModel {
     /**
      * 删除商品
      *
-     * @param o_id
+     * @param g_id
      * @param callBack
      */
-    void deleteGoods(String o_id, final IModelCallBack callBack);
+    void deleteGoods(String g_id, final IModelCallBack callBack);
 
     /**
      * 接单

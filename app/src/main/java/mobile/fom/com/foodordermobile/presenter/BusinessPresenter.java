@@ -257,7 +257,7 @@ public class BusinessPresenter {
     接单
      */
     public void receiptOrder(String o_id) {
-        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+        mBusinessModel.receiptOrder(o_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
@@ -278,7 +278,7 @@ public class BusinessPresenter {
     拒单
      */
     public void refuseOrder(String o_id) {
-        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+        mBusinessModel.refuseOrder(o_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
@@ -299,7 +299,7 @@ public class BusinessPresenter {
     核销
     */
     public void usedOrder(String o_id) {
-        mBusinessModel.deleteGoods(o_id, new IModelCallBack() {
+        mBusinessModel.usedOrder(o_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
