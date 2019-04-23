@@ -194,18 +194,61 @@ public class BusinessPresenter {
     /*
     查找所有商品
      */
-    public void getAllGoods(String b_id){
+    public void getAllGoods(String b_id) {
         mBusinessModel.getAllGoods(b_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 Gson gson = new Gson();
-                List<Goods> goods = gson.fromJson(msg,new TypeToken<List<Goods>>(){}.getType());
+                List<Goods> goods = gson.fromJson(msg, new TypeToken<List<Goods>>() {
+                }.getType());
                 mBusinessAllGoodsView.setGoodsList(goods);
             }
 
             @Override
             public void onFailure(String msg) {
                 mBusinessAllGoodsView.showErrorMsg(msg);
+            }
+        });
+    }
+
+    /*
+    修改goods
+     */
+    public void updateGoods(Goods goods) {
+        mBusinessModel.updateGoods(goods, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("修改成功");
+                } else {
+                    mBusinessGoodsView.changeFailed(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
+            }
+        });
+    }
+
+    /*
+    删除goods
+     */
+    public void deleteGoods(String g_id) {
+        mBusinessModel.deleteGoods(g_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    mBusinessGoodsView.changeSuccess("删除成功");
+                } else {
+                    mBusinessGoodsView.changeFailed(msg);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessGoodsView.changeFailed(msg);
             }
         });
     }

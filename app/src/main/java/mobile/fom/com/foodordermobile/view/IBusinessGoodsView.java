@@ -1,7 +1,5 @@
 package mobile.fom.com.foodordermobile.view;
 
-import mobile.fom.com.foodordermobile.bean.Goods;
-
 public interface IBusinessGoodsView {
 
     /**

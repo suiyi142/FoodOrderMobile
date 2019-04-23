@@ -12,6 +12,7 @@ import java.util.List;
 
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Goods;
+import mobile.fom.com.foodordermobile.view.activity.BusinessUpdateGoodsActivity;
 
 public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdapter.ViewHolder> {
 
@@ -30,12 +31,19 @@ public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Goods goods = goodsList.get(i);
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+        final Goods goods = goodsList.get(i);
         viewHolder.tv_name.setText(goods.getName());
         viewHolder.tv_other.setText(goods.getOther());
-        String price = "￥" +  goods.getPrice();
+        String price = "￥" + goods.getPrice();
         viewHolder.tv_price.setText(price);
+        //点击条目跳转到修改商品界面
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BusinessUpdateGoodsActivity.startActivity(viewHolder.itemView.getContext(), goods);
+            }
+        });
 
     }
 
@@ -50,9 +58,11 @@ public class BusinessGoodsAdapter extends RecyclerView.Adapter<BusinessGoodsAdap
         private final TextView tv_name;
         private final TextView tv_other;
         private final TextView tv_price;
+        private final View itemView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             iv_pic = itemView.findViewById(R.id.iv_business_goods_pic);
             tv_name = itemView.findViewById(R.id.tv_item_business_goods_name);
             tv_other = itemView.findViewById(R.id.tv_item_business_goods_other);

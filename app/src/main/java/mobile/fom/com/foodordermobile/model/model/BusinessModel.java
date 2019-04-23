@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import mobile.fom.com.foodordermobile.bean.Business;
+import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
@@ -176,6 +177,22 @@ public class BusinessModel implements IBusinessModel {
                 callBack.onSuccess(response.body().string());
             }
         });
+    }
+
+    /*
+    修改商品
+     */
+    @Override
+    public void updateGoods(Goods goods, IModelCallBack callBack) {
+        //TODO 修改商品
+    }
+
+    /*
+    删除商品
+     */
+    @Override
+    public void deleteGoods(String b_id, IModelCallBack callBack) {
+        //TODO 删除商品
     }
 
 }

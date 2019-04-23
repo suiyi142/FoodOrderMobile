@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import mobile.fom.com.foodordermobile.R;
 import mobile.fom.com.foodordermobile.bean.Business;
-import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.EditTextUtil;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
@@ -45,14 +44,14 @@ public class BusinessAddGoodsActivity extends AppCompatActivity implements View.
     }
 
     private void initView() {
-        iv_add = findViewById(R.id.iv_business_add);
-        et_name = findViewById(R.id.et_business_add_name);
-        et_price = findViewById(R.id.et_business_add_price);
-        et_other = findViewById(R.id.et_business_add_other);
+        iv_add = findViewById(R.id.iv_business_update);
+        et_name = findViewById(R.id.et_business_update_name);
+        et_price = findViewById(R.id.et_business_update_price);
+        et_other = findViewById(R.id.et_business_update_other);
         editTextArrayList.add(et_name);
         editTextArrayList.add(et_price);
         editTextArrayList.add(et_other);
-        bt_submit = findViewById(R.id.bt_business_add_submit);
+        bt_submit = findViewById(R.id.bt_business_update_submit);
         bt_submit.setOnClickListener(this);
     }
 

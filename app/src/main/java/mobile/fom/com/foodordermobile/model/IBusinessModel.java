@@ -1,6 +1,7 @@
 package mobile.fom.com.foodordermobile.model;
 
 import mobile.fom.com.foodordermobile.bean.Business;
+import mobile.fom.com.foodordermobile.bean.Goods;
 
 public interface IBusinessModel {
     /**
@@ -60,5 +61,21 @@ public interface IBusinessModel {
      * @param callBack
      */
     void getAllGoods(String b_id, final IModelCallBack callBack);
+
+    /**
+     * 修改商品
+     *
+     * @param goods
+     * @param callBack
+     */
+    void updateGoods(Goods goods, final IModelCallBack callBack);
+
+    /**
+     * 删除商品
+     *
+     * @param b_id
+     * @param callBack
+     */
+    void deleteGoods(String b_id, final IModelCallBack callBack);
 
 }

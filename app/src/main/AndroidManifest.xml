@@ -27,7 +27,8 @@
         <activity android:name=".view.activity.UserActivity" />
         <activity android:name=".view.activity.UserFoodActivity" />
         <activity android:name=".view.activity.BusinessAddGoodsActivity" />
-        <activity android:name=".view.activity.BusinessAllGoodsActivity"></activity>
+        <activity android:name=".view.activity.BusinessAllGoodsActivity" />
+        <activity android:name=".view.activity.BusinessUpdateGoodsActivity"></activity>
     </application>
 
 </manifest>

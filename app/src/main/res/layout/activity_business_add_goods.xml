@@ -6,7 +6,7 @@
     tools:context=".view.activity.BusinessAddGoodsActivity">
 
     <ImageView
-        android:id="@+id/iv_business_add"
+        android:id="@+id/iv_business_update"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
@@ -14,48 +14,48 @@
         android:src="@drawable/add" />
 
     <TextView
-        android:id="@+id/tv_business_add"
+        android:id="@+id/tv_business_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_business_add"
+        android:layout_below="@+id/iv_business_update"
         android:layout_centerHorizontal="true"
         android:text="点击添加图片"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/et_business_add_name"
+        android:id="@+id/et_business_update_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_business_add"
+        android:layout_below="@+id/tv_business_update"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_add_circle"
         android:hint="商品名称" />
 
     <EditText
-        android:id="@+id/et_business_add_price"
+        android:id="@+id/et_business_update_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_business_add_name"
+        android:layout_below="@+id/et_business_update_name"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_add_circle"
         android:hint="价格"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/et_business_add_other"
+        android:id="@+id/et_business_update_other"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@+id/et_business_add_price"
+        android:layout_below="@+id/et_business_update_price"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_add_circle"
         android:hint="商品介绍"
         android:maxLines="3" />
 
     <Button
-        android:id="@+id/bt_business_add_submit"
+        android:id="@+id/bt_business_update_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_business_add_other"
+        android:layout_below="@+id/et_business_update_other"
         android:layout_margin="10dp"
         android:background="@drawable/btn_shape"
         android:text="提交" />

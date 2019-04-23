@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.BusinessUpdateGoodsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_business_update"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/add" />
+
+            <TextView
+                android:id="@+id/tv_business_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_business_update"
+                android:layout_centerHorizontal="true"
+                android:text="点击添加图片"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_business_update_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_business_update"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_add_circle"
+                android:hint="商品名称" />
+
+            <EditText
+                android:id="@+id/et_business_update_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_business_update_name"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@drawable/ic_add_circle"
+                android:hint="价格"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/et_business_update_other"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/et_business_update_price"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@drawable/ic_add_circle"
+                android:hint="商品介绍"
+                android:maxLines="3" />
+
+            <Button
+                android:id="@+id/bt_business_update_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_business_update_other"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_shape"
+                android:text="修   改" />
+
+            <Button
+                android:id="@+id/bt_business_add_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_business_update_submit"
+                android:layout_margin="10dp"
+                android:background="@color/dracula_primary"
+                android:text="删   除"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
