@@ -257,7 +257,7 @@ public class BusinessModel implements IBusinessModel {
     */
     @Override
     public void refuseOrder(String o_id, final IModelCallBack callBack) {
-        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_RECEIPT_ORDER;
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_REFUSE_ORDER;
         //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
         HashMap<String, String> map = new HashMap<>();
         map.put("o_id", o_id);
@@ -279,8 +279,7 @@ public class BusinessModel implements IBusinessModel {
     */
     @Override
     public void usedOrder(String o_id, final IModelCallBack callBack) {
-        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_RECEIPT_ORDER;
-        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_USED_ORDER;
         HashMap<String, String> map = new HashMap<>();
         map.put("o_id", o_id);
         HttpUtil.sendHttpRequest(url, map, new Callback() {
