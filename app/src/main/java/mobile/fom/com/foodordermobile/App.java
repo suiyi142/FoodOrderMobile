@@ -11,6 +11,7 @@ public class App extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         context = getApplicationContext();
     }
 
