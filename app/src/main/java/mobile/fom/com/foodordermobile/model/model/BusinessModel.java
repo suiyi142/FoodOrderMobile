@@ -295,4 +295,43 @@ public class BusinessModel implements IBusinessModel {
         });
     }
 
+
+    @Override
+    public void getUserName(String u_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_GET_USER_NAME;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("account", u_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseString = response.body().string();
+                Log.e(TAG,"setUserName"+response);
+                callBack.onSuccess(responseString);
+            }
+        });
+    }
+
+    @Override
+    public void getOrderItem(String o_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_GET_ORDER_ITEM;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("o_id", o_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("login wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
 }

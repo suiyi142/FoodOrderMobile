@@ -102,4 +102,20 @@ public interface IBusinessModel {
      */
     void usedOrder(String o_id, final IModelCallBack callBack);
 
+    /**
+     * 获取用户姓名
+     *
+     * @param u_id
+     * @param callBack
+     */
+    void getUserName(String u_id, final IModelCallBack callBack);
+
+    /**
+     * 获取消费列表
+     *
+     * @param o_id
+     * @param callBack
+     */
+    void getOrderItem(String o_id, final IModelCallBack callBack);
+
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.bean.Goods;
 import mobile.fom.com.foodordermobile.bean.Order;
+import mobile.fom.com.foodordermobile.bean.OrderItem;
+import mobile.fom.com.foodordermobile.bean.User;
 import mobile.fom.com.foodordermobile.model.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
@@ -17,6 +19,7 @@ import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 import mobile.fom.com.foodordermobile.view.IBusinessOrderView;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
 import mobile.fom.com.foodordermobile.view.IBusinessGoodsView;
+import mobile.fom.com.foodordermobile.view.IOrderView;
 
 public class BusinessPresenter {
     private IBusinessModel mBusinessModel;
@@ -25,6 +28,7 @@ public class BusinessPresenter {
     private IBusinessOrderView mBusinessOrderView;
     private IBusinessGoodsView mBusinessGoodsView;
     private IBusinessAllGoodsView mBusinessAllGoodsView;
+    private IOrderView orderView;
 
     public BusinessPresenter(IBusinessLoginView mBusinessView) {
         this.mBusinessLoginView = mBusinessView;
@@ -48,6 +52,11 @@ public class BusinessPresenter {
 
     public BusinessPresenter(IBusinessAllGoodsView mBusinessAllGoodsView) {
         this.mBusinessAllGoodsView = mBusinessAllGoodsView;
+        getBusinessModel();
+    }
+
+    public BusinessPresenter(IOrderView mBusinessAllGoodsView) {
+        this.orderView = orderView;
         getBusinessModel();
     }
 
@@ -261,15 +270,15 @@ public class BusinessPresenter {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
-                    mBusinessGoodsView.changeSuccess("接单成功");
+                    orderView.changeSuccess("接单成功");
                 } else {
-                    mBusinessGoodsView.changeFailed(msg);
+                    orderView.changeFailed(msg);
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                mBusinessGoodsView.changeFailed(msg);
+                orderView.changeFailed(msg);
             }
         });
     }
@@ -282,15 +291,15 @@ public class BusinessPresenter {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
-                    mBusinessGoodsView.changeSuccess("拒单成功");
+                    orderView.changeSuccess("拒单成功");
                 } else {
-                    mBusinessGoodsView.changeFailed(msg);
+                    orderView.changeFailed(msg);
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                mBusinessGoodsView.changeFailed(msg);
+                orderView.changeFailed(msg);
             }
         });
     }
@@ -303,18 +312,54 @@ public class BusinessPresenter {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("1")) {
-                    mBusinessGoodsView.changeSuccess("核销成功");
+                    orderView.changeSuccess("核销成功");
                 } else {
-                    mBusinessGoodsView.changeFailed(msg);
+                    orderView.changeFailed(msg);
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                mBusinessGoodsView.changeFailed(msg);
+                orderView.changeFailed(msg);
             }
         });
     }
 
 
+    public void getOrderItem(String o_id) {
+        mBusinessModel.getOrderItem(o_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("0")) {
+                    orderView.changeFailed("数据库错误");
+                } else {
+                    Gson gson = new Gson();
+                    List<OrderItem> list = gson.fromJson(msg, new TypeToken<List<OrderItem>>() {
+                    }.getType());
+                    orderView.setOrderItem(list);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                orderView.changeFailed(msg);
+            }
+        });
+    }
+
+
+    public void getUserName(String u_id) {
+        mBusinessModel.getUserName(u_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                User user = new Gson().fromJson(msg, User.class);
+                orderView.setUserName(user.getName());
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                orderView.changeFailed(msg);
+            }
+        });
+    }
 }

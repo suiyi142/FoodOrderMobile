@@ -9,13 +9,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mobile.fom.com.foodordermobile.R;
+import mobile.fom.com.foodordermobile.adapter.OrderGoodsAdapter;
 import mobile.fom.com.foodordermobile.bean.Order;
+import mobile.fom.com.foodordermobile.bean.OrderItem;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
 import mobile.fom.com.foodordermobile.view.IBusinessGoodsView;
+import mobile.fom.com.foodordermobile.view.IOrderView;
 
-public class BusinessOrderActivity extends AppCompatActivity implements View.OnClickListener, IBusinessGoodsView {
+public class BusinessOrderActivity extends AppCompatActivity implements View.OnClickListener, IOrderView {
 
     private Order order;
     private TextView tv_u_name;
@@ -26,6 +32,8 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
     private Button bt_oder_refuse;
     private Button bt_oder_used;
     private BusinessPresenter presenter;
+    private List<OrderItem> orderItems = new ArrayList<>();
+    private OrderGoodsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,10 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
         bt_oder_refuse.setOnClickListener(this);
         bt_oder_used.setOnClickListener(this);
         setViewState();
+        presenter.getUserName(order.getU_id());
+        presenter.getOrderItem(order.getO_id());
+        adapter = new OrderGoodsAdapter(this,R.layout.item_order_goods,orderItems);
+        lv_goods.setAdapter(adapter);
     }
 
     /*
@@ -129,6 +141,28 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
             @Override
             public void run() {
                 ToastUtil.showToast(BusinessOrderActivity.this, msg);
+            }
+        });
+    }
+
+    @Override
+    public void setUserName(final String name) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv_u_name.setText("用户："+name);
+            }
+        });
+    }
+
+    @Override
+    public void setOrderItem(final List<OrderItem> list) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                orderItems.clear();
+                orderItems.addAll(list);
+                adapter.notifyDataSetChanged();
             }
         });
     }

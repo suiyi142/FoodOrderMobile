@@ -42,6 +42,8 @@ public class FoodOrderConstant {
     public static final String B_BUSINESS_REFUSE_ORDER = "BusinessServlet?method=refuse";
     //核销
     public static final String B_BUSINESS_USED_ORDER = "BusinessServlet?method=used";
+    //获取订单条目
+    public static final String B_BUSINESS_GET_ORDER_ITEM = "BusinessServlet?method=getOderItem";
 
     //------------------------用户--------------------------
     //用户登录
@@ -54,4 +56,6 @@ public class FoodOrderConstant {
     public static final String U_FIND_GOODS = "/UserServlet?method=findGoods";
     //提交订单
     public static final String U_COMMIT_ORDER = "/UserServlet?method=sendOrder";
+    //获取用户姓名
+    public static final String U_GET_USER_NAME = "UserServlet?method=findUserById";
 }
