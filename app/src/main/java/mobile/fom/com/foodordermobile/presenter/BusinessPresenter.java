@@ -55,7 +55,7 @@ public class BusinessPresenter {
         getBusinessModel();
     }
 
-    public BusinessPresenter(IOrderView mBusinessAllGoodsView) {
+    public BusinessPresenter(IOrderView orderView) {
         this.orderView = orderView;
         getBusinessModel();
     }
@@ -352,7 +352,8 @@ public class BusinessPresenter {
         mBusinessModel.getUserName(u_id, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
-                User user = new Gson().fromJson(msg, User.class);
+                Gson gson = new Gson();
+                User user = gson.fromJson(msg, User.class);
                 orderView.setUserName(user.getName());
             }
 

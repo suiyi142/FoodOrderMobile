@@ -188,13 +188,12 @@ public class BusinessModel implements IBusinessModel {
     @Override
     public void updateGoods(Goods goods, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_UPDATE_GOODS;
-        //g_id=9892F33650C34A99BF8F638A765C6841&name=大白&price=4&other=富含维生
         HashMap<String, String> map = new HashMap<>();
         map.put("g_id", goods.getG_id());
         map.put("name", goods.getName());
         map.put("price", goods.getPrice());
         map.put("other", goods.getOther());
-        //Log.i(TAG,goods.toString());
+        Log.i(TAG,goods.toString());
         HttpUtil.sendHttpRequest(url, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -310,7 +309,7 @@ public class BusinessModel implements IBusinessModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
-                Log.e(TAG,"setUserName"+response);
+                Log.e(TAG,"user"+responseString);
                 callBack.onSuccess(responseString);
             }
         });
@@ -329,7 +328,9 @@ public class BusinessModel implements IBusinessModel {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                callBack.onSuccess(response.body().string());
+                String responseString = response.body().string();
+                Log.e(TAG,"setUserName"+response);
+                callBack.onSuccess(responseString);
             }
         });
     }

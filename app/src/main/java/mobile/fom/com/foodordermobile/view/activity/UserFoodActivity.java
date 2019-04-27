@@ -379,5 +379,26 @@ public class UserFoodActivity extends AppCompatActivity implements IUserGoodsVie
         });
     }
 
+    @Override
+    public void commitSuccess(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(UserFoodActivity.this, msg);
+                UserFoodActivity.this.finish();
+            }
+        });
+    }
+
+    @Override
+    public void commitFailed(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(UserFoodActivity.this, msg);
+            }
+        });
+    }
+
 
 }

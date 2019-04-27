@@ -8,4 +8,8 @@ public interface IUserGoodsView {
     void setGoodsList(ArrayList<Goods> goodsList);
 
     void showGetGoodsFailed(String msg);
+
+    void commitSuccess(String msg);
+
+    void commitFailed(String msg);
 }

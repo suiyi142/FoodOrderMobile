@@ -169,12 +169,15 @@ public class UserPresenter {
         mUserModel.commitOrder(u_id, b_id, json, other, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
-
+                if (msg.equals("1"))
+                    mUserGoodsView.commitSuccess("提交成功");
+                else
+                    mUserGoodsView.commitFailed("提交失败");
             }
 
             @Override
             public void onFailure(String msg) {
-
+                mUserGoodsView.commitFailed(msg);
             }
         });
     }

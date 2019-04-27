@@ -27,5 +27,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/gray"
-        android:text="啊哈哈哈" />
+        android:gravity="center"
+        android:text="彩蛋一枚" />
 </android.support.v4.widget.DrawerLayout>

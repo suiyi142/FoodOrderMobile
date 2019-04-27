@@ -17,8 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scv"
+
+    <ListView
+        android:id="@+id/lv__order_goods"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="8dp"
@@ -27,13 +28,7 @@
         android:background="@drawable/bg_black_stork"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_order_u_name">
-
-        <ListView
-            android:id="@+id/lv__order_goods"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_u_name" />
 
     <TextView
         android:id="@+id/tv_order_price"
@@ -43,7 +38,7 @@
         android:layout_marginTop="10dp"
         android:text="金额：￥20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scv" />
+        app:layout_constraintTop_toBottomOf="@+id/lv__order_goods" />
 
     <TextView
         android:id="@+id/tv_order_state"
@@ -53,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:text="已接单"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scv" />
+        app:layout_constraintTop_toBottomOf="@+id/lv__order_goods" />
 
     <Button
         android:id="@+id/bt_oder_receipt"
@@ -70,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scv" />
+        app:layout_constraintTop_toBottomOf="@+id/lv__order_goods" />
 
     <Button
         android:id="@+id/bt_oder_refuse"
