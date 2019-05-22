@@ -118,4 +118,22 @@ public interface IBusinessModel {
      */
     void getOrderItem(String o_id, final IModelCallBack callBack);
 
+    /**
+     * 修改密码
+     *
+     * @param b_id
+     * @param address
+     * @param newPassword
+     * @param callBack
+     */
+    void changePassword(String b_id, String address, String newPassword, final IModelCallBack callBack);
+
+    /**
+     * 删除订单
+     *
+     * @param o_id
+     * @param callBack
+     */
+    void deleteOrder(String o_id, IModelCallBack callBack);
+
 }

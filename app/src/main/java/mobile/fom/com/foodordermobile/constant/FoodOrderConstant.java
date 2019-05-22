@@ -15,7 +15,8 @@ public class FoodOrderConstant {
     public static final String REMEMBER_PASSWORD_STATE = "remember_password_state";
 
     //服务器交互
-    public static final String SERVER_ADDRESS = "http://10.0.2.2:8080/foodOrderServer/";
+    public static final String SERVER_ADDRESS = "http://123.207.153.97:8080/foodOrderServer/";
+    //public static final String SERVER_ADDRESS = "http://192.168.43.177:8080/foodOrderServer/";
 
     //-----------------------商家--------------------------
     //获取商家列表
@@ -44,6 +45,10 @@ public class FoodOrderConstant {
     public static final String B_BUSINESS_USED_ORDER = "BusinessServlet?method=used";
     //获取订单条目
     public static final String B_BUSINESS_GET_ORDER_ITEM = "BusinessServlet?method=getOderItem";
+    //修改密码
+    public static final String B_BUSINESS_CHANGE_PASSWORD = "BusinessServlet?method=changePassword";
+    //删除订单
+    public static final String B_BUSINESS_DELETE_ORDER = "BusinessServlet?method=deleteOrder";
 
     //------------------------用户--------------------------
     //用户登录
@@ -58,4 +63,8 @@ public class FoodOrderConstant {
     public static final String U_COMMIT_ORDER = "/UserServlet?method=sendOrder";
     //获取用户姓名
     public static final String U_GET_USER_NAME = "UserServlet?method=findUserById";
+    //修改密码
+    public static final String U_CHANGE_PASSWORD = "UserServlet?method=changePassword";
+    //获取订单
+    public static final String U_GET_ORDERS = "UserServlet?method=getOldOrder";
 }

@@ -102,6 +102,8 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
         registerList.add(et_user_register_re_password);
         bt_user_register = findViewById(R.id.bt_user_register);
         bt_user_register.setOnClickListener(this);
+        TextView tv_user_change = findViewById(R.id.tv_user_change);
+        tv_user_change.setOnClickListener(this);
 
 
     }
@@ -149,6 +151,9 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
                 String register_account = et_user_register_account.getText().toString().trim();
                 String name = et_user_register_name.getText().toString().trim();
                 presenter.register(register_account, name, register_password);
+                break;
+            case R.id.tv_user_change:
+                UserChangePasswordActivity.startActivity(this);
                 break;
         }
 
@@ -238,12 +243,12 @@ public class UserLoginActivity extends App implements IUserLoginRegisterView, Vi
         runOnUiThread(new Thread() {
             @Override
             public void run() {
-                ToastUtil.showToast(UserLoginActivity.this, user.toString());
+                //ToastUtil.showToast(UserLoginActivity.this, user.toString());
                 presenter.saveLoginState(cb_user_remember.isChecked()
                         , cb_user_autoLogin.isChecked()
                         , et_user_login_account.getText().toString().trim()
                         , et_user_login_password.getText().toString().trim());
-                UserActivity.startActivity(UserLoginActivity.this,user);
+                UserActivity.startActivity(UserLoginActivity.this, user);
 
 
             }

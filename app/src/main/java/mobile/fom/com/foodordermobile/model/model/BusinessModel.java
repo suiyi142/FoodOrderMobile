@@ -193,7 +193,7 @@ public class BusinessModel implements IBusinessModel {
         map.put("name", goods.getName());
         map.put("price", goods.getPrice());
         map.put("other", goods.getOther());
-        Log.i(TAG,goods.toString());
+        Log.i(TAG, goods.toString());
         HttpUtil.sendHttpRequest(url, map, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -309,7 +309,6 @@ public class BusinessModel implements IBusinessModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
-                Log.e(TAG,"user"+responseString);
                 callBack.onSuccess(responseString);
             }
         });
@@ -329,7 +328,47 @@ public class BusinessModel implements IBusinessModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
-                Log.e(TAG,"setUserName"+response);
+                callBack.onSuccess(responseString);
+            }
+        });
+    }
+
+    @Override
+    public void changePassword(String b_id, String address, String newPassword, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_CHANGE_PASSWORD;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("b_id", b_id);
+        map.put("address", address);
+        map.put("newPassword", newPassword);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("change password wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseString = response.body().string();
+                callBack.onSuccess(responseString);
+            }
+        });
+
+    }
+
+    @Override
+    public void deleteOrder(String o_id, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.B_BUSINESS_DELETE_ORDER;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("o_id", o_id);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connected wrong");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseString = response.body().string();
                 callBack.onSuccess(responseString);
             }
         });

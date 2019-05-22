@@ -3,6 +3,7 @@ package mobile.fom.com.foodordermobile.view.activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import mobile.fom.com.foodordermobile.App;
 import mobile.fom.com.foodordermobile.R;
+import mobile.fom.com.foodordermobile.adapter.BussinessAdapter;
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.presenter.BusinessPresenter;
 import mobile.fom.com.foodordermobile.util.ToastUtil;
@@ -103,11 +105,11 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     @Override
     public void setBusinessList(ArrayList<Business> list) {
         this.list = list;
-        businessNamesList = new ArrayList<>();
+        businessNamesList = new ArrayList<String>();
         for (Business business : list) {
             businessNamesList.add(business.getAddress());
         }
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(BusinessLoginActivity.this, android.R.layout.simple_list_item_1, businessNamesList);
+        final BussinessAdapter adapter = new BussinessAdapter(BusinessLoginActivity.this, R.layout.item_business, businessNamesList);
         runOnUiThread(new Thread() {
             @Override
             public void run() {
@@ -143,6 +145,7 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
             @Override
             public void run() {
                 String text = "莫得商家,点击重试";
+                progressDialog.dismiss();
                 SpannableString span = new SpannableString(text);
                 span.setSpan(new UnderlineSpan(), 7, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tv_business_null.setText(span);
@@ -169,12 +172,29 @@ public class BusinessLoginActivity extends App implements IBusinessLoginView, Vi
     }
 
     @Override
-    public void showLoginErrorMsg(final String msg) {
+    public void showLoginErrorMsg(final String b_id, final String msg) {
         progressDialog.dismiss();
         runOnUiThread(new Thread() {
             @Override
             public void run() {
-                ToastUtil.showToast(BusinessLoginActivity.this, msg);
+                if (msg.equals("登录失败")) {
+                    new AlertDialog.Builder(BusinessLoginActivity.this)
+                            .setMessage("密码错误，是否要重置密码？")
+                            .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    BusinessChangePasswordActivity.startActivity(BusinessLoginActivity.this, b_id);
+                                }
+                            }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create().show();
+
+                } else {
+                    ToastUtil.showToast(BusinessLoginActivity.this, msg);
+                }
             }
         });
     }

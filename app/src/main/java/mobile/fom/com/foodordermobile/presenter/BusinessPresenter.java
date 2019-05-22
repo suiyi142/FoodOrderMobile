@@ -15,6 +15,7 @@ import mobile.fom.com.foodordermobile.model.model.BusinessModel;
 import mobile.fom.com.foodordermobile.model.IBusinessModel;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.view.IBusinessAllGoodsView;
+import mobile.fom.com.foodordermobile.view.IBusinessChangePasswordView;
 import mobile.fom.com.foodordermobile.view.IBusinessLoginView;
 import mobile.fom.com.foodordermobile.view.IBusinessOrderView;
 import mobile.fom.com.foodordermobile.view.IBusinessRegisterView;
@@ -29,6 +30,7 @@ public class BusinessPresenter {
     private IBusinessGoodsView mBusinessGoodsView;
     private IBusinessAllGoodsView mBusinessAllGoodsView;
     private IOrderView orderView;
+    private IBusinessChangePasswordView mBusinessChangePasswordView;
 
     public BusinessPresenter(IBusinessLoginView mBusinessView) {
         this.mBusinessLoginView = mBusinessView;
@@ -57,6 +59,11 @@ public class BusinessPresenter {
 
     public BusinessPresenter(IOrderView orderView) {
         this.orderView = orderView;
+        getBusinessModel();
+    }
+
+    public BusinessPresenter(IBusinessChangePasswordView mBusinessChangePasswordView) {
+        this.mBusinessChangePasswordView = mBusinessChangePasswordView;
         getBusinessModel();
     }
 
@@ -118,12 +125,12 @@ public class BusinessPresenter {
      * @param b_id     商家id
      * @param password 商家密码
      */
-    public void businessLogin(String b_id, String password) {
+    public void businessLogin(final String b_id, String password) {
         mBusinessModel.login(b_id, password, new IModelCallBack() {
             @Override
             public void onSuccess(String msg) {
                 if (msg.equals("0"))
-                    mBusinessLoginView.showLoginErrorMsg("登录失败");
+                    mBusinessLoginView.showLoginErrorMsg(b_id, "登录失败");
                 else {
                     Gson gson = new Gson();
                     Business business = gson.fromJson(msg, Business.class);
@@ -133,7 +140,7 @@ public class BusinessPresenter {
 
             @Override
             public void onFailure(String msg) {
-                mBusinessLoginView.showLoginErrorMsg(msg);
+                mBusinessLoginView.showLoginErrorMsg(b_id, msg);
             }
         });
     }
@@ -325,6 +332,24 @@ public class BusinessPresenter {
         });
     }
 
+    public void deleteOrder(String o_id){
+        mBusinessModel.deleteOrder(o_id, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                if (msg.equals("1")) {
+                    orderView.changeSuccess("删除成功");
+                } else {
+                    orderView.changeFailed("删除失败");
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                orderView.changeFailed(msg);
+            }
+        });
+    }
+
 
     public void getOrderItem(String o_id) {
         mBusinessModel.getOrderItem(o_id, new IModelCallBack() {
@@ -363,4 +388,32 @@ public class BusinessPresenter {
             }
         });
     }
+
+    /**
+     * 修改密码
+     */
+    public void changePassword(final String b_id, String address, String newPassword) {
+        mBusinessModel.changePassword(b_id, address, newPassword, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                switch (msg) {
+                    case "1":
+                        mBusinessChangePasswordView.changeFailed("没有这个商家");
+                        break;
+                    case "2":
+                        mBusinessChangePasswordView.changeFailed("商家地址错误");
+                        break;
+                    case "3":
+                        mBusinessChangePasswordView.changeSuccess();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mBusinessChangePasswordView.changeFailed(msg);
+            }
+        });
+    }
+
 }

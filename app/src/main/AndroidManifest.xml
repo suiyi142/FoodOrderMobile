@@ -29,7 +29,10 @@
         <activity android:name=".view.activity.BusinessAddGoodsActivity" />
         <activity android:name=".view.activity.BusinessAllGoodsActivity" />
         <activity android:name=".view.activity.BusinessUpdateGoodsActivity" />
-        <activity android:name=".view.activity.BusinessOrderActivity"></activity>
+        <activity android:name=".view.activity.BusinessOrderActivity" />
+        <activity android:name=".view.activity.BusinessChangePasswordActivity" />
+        <activity android:name=".view.activity.UserChangePasswordActivity" />
+        <activity android:name=".view.activity.UserOrderActivity"></activity>
     </application>
 
 </manifest>

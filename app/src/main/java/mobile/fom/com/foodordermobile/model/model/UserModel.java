@@ -138,7 +138,7 @@ public class UserModel implements IUserModel {
      * @param other    备注
      */
     @Override
-    public void commitOrder(String u_id, String b_id, String jsonList, String other,final IModelCallBack callBack) {
+    public void commitOrder(String u_id, String b_id, String jsonList, String other, final IModelCallBack callBack) {
         String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_COMMIT_ORDER;
         HashMap<String, String> map = new HashMap<>();
         map.put("u_id", u_id);
@@ -173,5 +173,57 @@ public class UserModel implements IUserModel {
         map.put(FoodOrderConstant.REMEMBER_ACCOUNT, sp.getString(FoodOrderConstant.REMEMBER_ACCOUNT, ""));
         map.put(FoodOrderConstant.REMEMBER_PASSWORD, sp.getString(FoodOrderConstant.REMEMBER_PASSWORD, ""));
         return map;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param account
+     * @param name
+     * @param newPassword
+     * @param callBack
+     */
+    @Override
+    public void changePassword(String account, String name, String newPassword, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_CHANGE_PASSWORD;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("account", account);
+        map.put("name", name);
+        map.put("newPassword", newPassword);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connection error");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
+    }
+
+    /**
+     * 获取用户订单
+     *
+     * @param account
+     * @param callBack
+     */
+    @Override
+    public void getOrder(String account, final IModelCallBack callBack) {
+        String url = FoodOrderConstant.SERVER_ADDRESS + FoodOrderConstant.U_GET_ORDERS;
+        HashMap<String, String> map = new HashMap<>();
+        map.put("account", account);
+        HttpUtil.sendHttpRequest(url, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure("connection error");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response.body().string());
+            }
+        });
     }
 }

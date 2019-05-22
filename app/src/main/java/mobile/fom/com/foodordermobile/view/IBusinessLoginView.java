@@ -30,6 +30,9 @@ public interface IBusinessLoginView {
      */
     void toBusiness(Business business);
 
-    void showLoginErrorMsg(String msg);
+    /**
+     * 登录失败
+     */
+    void showLoginErrorMsg(String b_id, String msg);
 
 }

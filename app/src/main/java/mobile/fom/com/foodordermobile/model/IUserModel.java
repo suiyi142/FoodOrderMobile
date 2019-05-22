@@ -18,4 +18,8 @@ public interface IUserModel {
     void commitOrder(String u_id, String b_id, String jsonList, String other, IModelCallBack callBack);
 
     HashMap<String, Object> getLoginState();
+
+    void changePassword(String account, String name, String newPassword, IModelCallBack callBack);
+
+    void getOrder(String account, IModelCallBack callBack);
 }

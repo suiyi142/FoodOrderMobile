@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,8 @@ public class UserActivity extends AppCompatActivity implements IUserView, Adapte
     private UserPresenter presenter;
     private SwipeRefreshLayout srf_user;
     private User user;
+    private TextView tv_user_order;
+    private TextView tv_user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,15 @@ public class UserActivity extends AppCompatActivity implements IUserView, Adapte
         srf_user = findViewById(R.id.srf_user);
         lv_user_list.setOnItemClickListener(this);
         srf_user.setOnRefreshListener(this);
+        tv_user_order = findViewById(R.id.tv_user_order);
+        tv_user_name = findViewById(R.id.tv_user_name);
+        tv_user_name.setText("欢迎您：" + user.getName());
+        tv_user_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserOrderActivity.startActivity(UserActivity.this, user.getAccount());
+            }
+        });
     }
 
     /*
@@ -66,7 +78,7 @@ public class UserActivity extends AppCompatActivity implements IUserView, Adapte
         if (businessList.get(i).getCurrent_seats() == 0)
             ToastUtil.showToast(this, "该餐厅没有座位了");
         else
-            UserFoodActivity.startActivity(this, businessList.get(i),user);
+            UserFoodActivity.startActivity(this, businessList.get(i), user);
     }
 
     /**

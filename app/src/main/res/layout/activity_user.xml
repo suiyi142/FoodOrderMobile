@@ -22,11 +22,11 @@
 
     </RelativeLayout>
 
-    <TextView
+    <include
+        layout="@layout/layout_user_left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:text="彩蛋一枚" />
+        android:layout_gravity="start" />
+
+
 </android.support.v4.widget.DrawerLayout>

@@ -12,13 +12,16 @@ import java.util.List;
 
 import mobile.fom.com.foodordermobile.bean.Business;
 import mobile.fom.com.foodordermobile.bean.Goods;
+import mobile.fom.com.foodordermobile.bean.Order;
 import mobile.fom.com.foodordermobile.bean.User;
 import mobile.fom.com.foodordermobile.constant.FoodOrderConstant;
 import mobile.fom.com.foodordermobile.model.IModelCallBack;
 import mobile.fom.com.foodordermobile.model.IUserModel;
 import mobile.fom.com.foodordermobile.model.model.UserModel;
+import mobile.fom.com.foodordermobile.view.IUserChangePasswordView;
 import mobile.fom.com.foodordermobile.view.IUserGoodsView;
 import mobile.fom.com.foodordermobile.view.IUserLoginRegisterView;
+import mobile.fom.com.foodordermobile.view.IUserOrderView;
 import mobile.fom.com.foodordermobile.view.IUserView;
 
 public class UserPresenter {
@@ -29,6 +32,8 @@ public class UserPresenter {
     private IUserLoginRegisterView mUserLoginRegisterView;
     private IUserView mUserView;
     private IUserGoodsView mUserGoodsView;
+    private IUserChangePasswordView mUserChangePasswordView;
+    private IUserOrderView mUserOrderView;
 
     public UserPresenter(IUserLoginRegisterView mUserLoginRegisterView) {
         this.mUserLoginRegisterView = mUserLoginRegisterView;
@@ -42,6 +47,16 @@ public class UserPresenter {
 
     public UserPresenter(IUserGoodsView mUserGoodsView) {
         this.mUserGoodsView = mUserGoodsView;
+        getUserModel();
+    }
+
+    public UserPresenter(IUserChangePasswordView mUserChangePasswordView) {
+        this.mUserChangePasswordView = mUserChangePasswordView;
+        getUserModel();
+    }
+
+    public UserPresenter(IUserOrderView mUserOrderView) {
+        this.mUserOrderView = mUserOrderView;
         getUserModel();
     }
 
@@ -178,6 +193,53 @@ public class UserPresenter {
             @Override
             public void onFailure(String msg) {
                 mUserGoodsView.commitFailed(msg);
+            }
+        });
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param account
+     * @param name
+     * @param newPassword
+     */
+    public void changePassword(String account, String name, String newPassword) {
+        mUserModel.changePassword(account, name, newPassword, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                switch (msg) {
+                    case "1":
+                        mUserChangePasswordView.changeFailed("没有这个用户");
+                        break;
+                    case "2":
+                        mUserChangePasswordView.changeFailed("用户昵称错误");
+                        break;
+                    case "3":
+                        mUserChangePasswordView.changeSuccess();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mUserChangePasswordView.changeFailed(msg);
+            }
+        });
+    }
+
+    public void getOrder(String account) {
+        mUserModel.getOrder(account, new IModelCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                List<Order> orderList = new Gson().fromJson(msg, new TypeToken<List<Order>>() {
+                }.getType());
+                mUserOrderView.getOrderSuccess(orderList);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mUserOrderView.getOrderFiled(msg);
             }
         });
     }

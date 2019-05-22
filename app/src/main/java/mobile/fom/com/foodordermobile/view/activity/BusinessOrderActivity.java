@@ -34,6 +34,8 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
     private BusinessPresenter presenter;
     private List<OrderItem> orderItems = new ArrayList<>();
     private OrderGoodsAdapter adapter;
+    private TextView tv_order_other;
+    private Button bt_oder_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +59,16 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
         bt_oder_receipt = findViewById(R.id.bt_oder_receipt);
         bt_oder_refuse = findViewById(R.id.bt_oder_refuse);
         bt_oder_used = findViewById(R.id.bt_oder_used);
+        tv_order_other = findViewById(R.id.tv_order_other);
+        bt_oder_delete = findViewById(R.id.bt_oder_delete);
+        bt_oder_delete.setOnClickListener(this);
         bt_oder_receipt.setOnClickListener(this);
         bt_oder_refuse.setOnClickListener(this);
         bt_oder_used.setOnClickListener(this);
         setViewState();
         presenter.getUserName(order.getU_id());
         presenter.getOrderItem(order.getO_id());
-        adapter = new OrderGoodsAdapter(this,R.layout.item_order_goods,orderItems);
+        adapter = new OrderGoodsAdapter(this, R.layout.item_order_goods, orderItems);
         lv_goods.setAdapter(adapter);
     }
 
@@ -71,6 +76,7 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
     设置按钮状态
      */
     private void setViewState() {
+        tv_order_other.setText("备注：" + order.getOther());
         tv_price.setText("金额：￥" + order.getPrice());
         switch (order.getState()) {
             case Order.STATE_NEW:
@@ -89,12 +95,14 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
                 bt_oder_receipt.setVisibility(View.GONE);
                 bt_oder_refuse.setVisibility(View.GONE);
                 bt_oder_used.setVisibility(View.GONE);
+                bt_oder_delete.setVisibility(View.VISIBLE);
                 tv_state.setText("已核销");
                 break;
             case Order.STATE_REFUSE:
                 bt_oder_receipt.setVisibility(View.GONE);
                 bt_oder_refuse.setVisibility(View.GONE);
                 bt_oder_used.setVisibility(View.GONE);
+                bt_oder_delete.setVisibility(View.VISIBLE);
                 tv_state.setText("已拒接");
                 break;
         }
@@ -119,6 +127,9 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.bt_oder_used:
                 presenter.usedOrder(order.getO_id());
+                break;
+            case R.id.bt_oder_delete:
+                presenter.deleteOrder(order.getO_id());
                 break;
         }
     }
@@ -150,7 +161,7 @@ public class BusinessOrderActivity extends AppCompatActivity implements View.OnC
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tv_u_name.setText("用户："+name);
+                tv_u_name.setText("用户：" + name);
             }
         });
     }

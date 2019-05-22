@@ -2,6 +2,7 @@ package mobile.fom.com.foodordermobile.bean;
 
 import java.io.Serializable;
 
+
 public class Order implements Serializable {
     private String o_id;
     private String b_id;
@@ -9,6 +10,16 @@ public class Order implements Serializable {
     private String price;
     private String other;
     private int state;
+    private String b_address;
+
+    public String getB_address() {
+        return b_address;
+    }
+
+    public void setB_address(String b_address) {
+        this.b_address = b_address;
+    }
+
     public static final int STATE_NEW = 0;      //未接单
     public static final int STATE_RECEIPT = 1;  //已接单
     public static final int STATE_USED = 2;     //已核销
@@ -83,6 +94,5 @@ public class Order implements Serializable {
     public void setState(int state) {
         this.state = state;
     }
-
 
 }
