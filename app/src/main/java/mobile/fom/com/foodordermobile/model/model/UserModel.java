@@ -124,6 +124,7 @@ public class UserModel implements IUserModel {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                String s = response.body().toString();
                 callBack.onSuccess(response.body().string());
             }
         });

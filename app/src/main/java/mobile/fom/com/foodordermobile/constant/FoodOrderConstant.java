@@ -15,7 +15,7 @@ public class FoodOrderConstant {
     public static final String REMEMBER_PASSWORD_STATE = "remember_password_state";
 
     //服务器交互
-    public static final String SERVER_ADDRESS = "http://123.207.153.97:8080/foodOrderServer/";
+    public static final String SERVER_ADDRESS = "http://106.52.84.143:80/foodOrderServer/";
     //public static final String SERVER_ADDRESS = "http://192.168.43.177:8080/foodOrderServer/";
 
     //-----------------------商家--------------------------
